@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "573689986361",
+    "project_id": "cov-ahead",
+    "storage_bucket": "cov-ahead.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573689986361:android:df7eded192a3382b2ebce8",
+        "android_client_info": {
+          "package_name": "com.ikp773.cov_ahead"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573689986361-1k6p0fbj9idkko1tpam3d95p9jssk47a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ikp773.cov_ahead",
+            "certificate_hash": "ae6b8cecc9db07985fcccc5a7df80025c56922da"
+          }
+        },
+        {
+          "client_id": "573689986361-ijt0eq4hf02ggk06nav6csiim5leui28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1ho-tZDhTM0awgaxOjKIrpfK40xtqCzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "573689986361-ijt0eq4hf02ggk06nav6csiim5leui28.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
