@@ -1,4 +1,4 @@
-# covid_qrcode_bfh
+# Cov-Ahead
 
 A new Flutter application.
 
