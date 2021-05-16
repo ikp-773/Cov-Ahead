@@ -12,9 +12,7 @@ class SplashScreen extends StatelessWidget {
             ) {
           return Center(child: CircularProgressIndicator());
         }
-        return Scaffold(
-          body: (MerchantOrCustomer()),
-        );
+        return MerchantOrCustomer();
       },
     );
   }
