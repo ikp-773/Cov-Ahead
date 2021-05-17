@@ -28,7 +28,7 @@ class AuthServices {
     }
   }
 
-  Future signInUsingGmail() async {
+  Future signInUsingGoogle() async {
     try {
       GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
       GoogleSignInAuthentication googleSignInAuthentication =

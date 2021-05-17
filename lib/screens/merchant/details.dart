@@ -1,14 +1,14 @@
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class EditDetailsCustomer extends StatefulWidget {
-  EditDetailsCustomer({Key key}) : super(key: key);
+class EditDetailsMerchant extends StatefulWidget {
+  EditDetailsMerchant({Key key}) : super(key: key);
 
   @override
-  _EditDetailsCustomerState createState() => _EditDetailsCustomerState();
+  _EditDetailsMerchantState createState() => _EditDetailsMerchantState();
 }
 
-class _EditDetailsCustomerState extends State<EditDetailsCustomer> {
+class _EditDetailsMerchantState extends State<EditDetailsMerchant> {
   final _formKey = GlobalKey<FormState>();
   final AuthServices _auth = AuthServices();
 
@@ -22,7 +22,32 @@ class _EditDetailsCustomerState extends State<EditDetailsCustomer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Customer Sign In"),
+        title: Text("Merchant Sign In"),
+      ),
+      bottomNavigationBar: GestureDetector(
+        onTap: () async {
+          if (_formKey.currentState.validate()) {
+            setState(() {});
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
+          margin: EdgeInsets.fromLTRB(23, 0, 23, 24),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          height: 50,
+          width: 600,
+          child: Text(
+            'Go to Dashboard',
+            style: TextStyle(
+              color: Color(0xffffffff),
+              fontSize: 16,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -34,7 +59,17 @@ class _EditDetailsCustomerState extends State<EditDetailsCustomer> {
                 child: Column(
                   children: [
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'Name'),
+                      decoration: InputDecoration(labelText: 'Merchant Name'),
+                      validator: (value) =>
+                          value.isEmpty ? 'Field Cannot be Blank ' : null,
+                      onChanged: (value) {
+                        setState(() {
+                          name = value;
+                        });
+                      },
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Shop Name'),
                       validator: (value) =>
                           value.isEmpty ? 'Field Cannot be Blank ' : null,
                       onChanged: (value) {
@@ -68,24 +103,20 @@ class _EditDetailsCustomerState extends State<EditDetailsCustomer> {
                     TextFormField(
                       minLines: 3,
                       maxLines: 3,
-                      decoration: InputDecoration(labelText: 'Address'),
+                      decoration: InputDecoration(labelText: 'Shop Address'),
                     ),
-                    // Vaccine status dropdown, needs improvement
-                    DropdownButton(
-                        value: value,
-                        onChanged: (val) {
-                          setState(() {
-                            value = val;
-                          });
-                        },
-                        items: [
-                          DropdownMenuItem(
-                              child: Text('Not vaccinated'), value: 1),
-                          DropdownMenuItem(
-                              child: Text('Taken First Dose'), value: 2),
-                          DropdownMenuItem(
-                              child: Text('Fully vaccinated'), value: 3),
-                        ])
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(labelText: 'Pincode'),
+                      validator: (value) =>
+                          value.isEmpty ? 'Field Cannot be Blank ' : null,
+                      onChanged: (value) {
+                        setState(() {
+                          name = value;
+                        });
+                      },
+                    ),
+                    
                   ],
                 ),
               ),

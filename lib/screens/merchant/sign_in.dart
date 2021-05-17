@@ -1,16 +1,18 @@
 import 'package:covid_qrcode_bfh/screens/customer/home.dart';
 import 'package:covid_qrcode_bfh/screens/customer/sign_up.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/details.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/qr_generated.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants.dart';
 
-class SignInCustomer extends StatefulWidget {
+class SignInMerchant extends StatefulWidget {
   @override
-  _SignInCustomerState createState() => _SignInCustomerState();
+  _SignInMerchantState createState() => _SignInMerchantState();
 }
 
-class _SignInCustomerState extends State<SignInCustomer> {
+class _SignInMerchantState extends State<SignInMerchant> {
   final _formKey = GlobalKey<FormState>();
   final AuthServices _auth = AuthServices();
 
@@ -24,70 +26,73 @@ class _SignInCustomerState extends State<SignInCustomer> {
       backgroundColor: Colors.white,
       bottomNavigationBar: SizedBox(
         height: 130,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Or Login with',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 40),
-            GestureDetector(
-              onTap: () async {
-                dynamic result = await _auth.signInUsingGoogle();
-                Get.to(HomeCustomer());
-                if (result == null) {
-                  setState(() {
-                    error = 'Could not Sign In';
-                  });
-                }
-              },
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 23),
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(5),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              
+              Text(
+                'Or Login with',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
                 ),
-                height: 50,
-                width: 600,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13),
-                      child: Image.asset(
-                        'assets/icons/google.png',
-                        height: 15.4,
-                      ),
-                    ),
-                    Container(
-                      width: .5,
-                      height: 60,
-                      margin: EdgeInsets.fromLTRB(0, 10, 35, 10),
-                      color: Color(0x40ffffff),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
-                      child: Text(
-                        'Continue with Google',
-                        style: TextStyle(
-                          color: Color(0xffffffff),
-                          fontSize: 16,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 40),
+              GestureDetector(
+                onTap: () async {
+                  dynamic result = await _auth.signInUsingGoogle();
+                  Get.to(HomeCustomer());
+                  if (result == null) {
+                    setState(() {
+                      error = 'Could not Sign In';
+                    });
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 23),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  height: 50,
+                  width: 600,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(13),
+                        child: Image.asset(
+                          'assets/icons/google.png',
+                          height: 15.4,
                         ),
-                        textAlign: TextAlign.center,
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: .5,
+                        height: 60,
+                        margin: EdgeInsets.fromLTRB(0, 10, 35, 10),
+                        color: Color(0x40ffffff),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
+                        child: Text(
+                          'Continue with Google',
+                          style: TextStyle(
+                            color: Color(0xffffffff),
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            )
-          ],
+              SizedBox(
+                height: 10,
+              )
+            ],
+          ),
         ),
       ),
       body: SingleChildScrollView(

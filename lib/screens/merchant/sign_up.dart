@@ -1,20 +1,22 @@
 import 'package:covid_qrcode_bfh/screens/customer/home.dart';
 import 'package:covid_qrcode_bfh/screens/customer/sign_in.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/qr_generated.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/sign_in.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants.dart';
 
-class SignUpCustomer extends StatefulWidget {
-  SignUpCustomer({Key key, this.title}) : super(key: key);
+class SignUpMerchant extends StatefulWidget {
+  SignUpMerchant({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _SignUpCustomerState createState() => _SignUpCustomerState();
+  _SignUpMerchantState createState() => _SignUpMerchantState();
 }
 
-class _SignUpCustomerState extends State<SignUpCustomer> {
+class _SignUpMerchantState extends State<SignUpMerchant> {
   final _formKey = GlobalKey<FormState>();
   final AuthServices _auth = AuthServices();
 
@@ -31,6 +33,27 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            //START DEBUG
+              GestureDetector(
+                onTap: () {
+                  //Authenticates the merchant and fetches MerchantData
+                  //from cloud firestore and passes to Generated QR page
+                  
+                  Get.to(() => GeneratedQR());
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 23),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  height: 50,
+                  width: 600,
+                  child: Text('Go to details'),
+                ),
+              ),
+
+              //END DEBUG
             GestureDetector(
               onTap: () async {
                 dynamic result = await _auth.signInUsingGoogle();
@@ -93,7 +116,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(SignInCustomer());
+                    Get.to(SignInMerchant());
                   },
                   child: Text(
                     'log in ',

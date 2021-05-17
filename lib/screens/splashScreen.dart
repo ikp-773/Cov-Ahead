@@ -1,6 +1,5 @@
 import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
   @override

@@ -1,4 +1,5 @@
 import 'package:covid_qrcode_bfh/screens/customer/sign_up.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,7 @@ class MerchantOrCustomer extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  print('Clicked!');
+                  Get.to(() => SignUpMerchant());
                 },
                 child: Text('Contine as Merchant'),
               ),
