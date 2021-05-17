@@ -1,8 +1,8 @@
 import 'package:covid_qrcode_bfh/screens/customer/home.dart';
-import 'package:covid_qrcode_bfh/screens/customer/sign_up.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'constants.dart';
 
 class SignInCustomer extends StatefulWidget {
