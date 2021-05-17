@@ -1,6 +1,6 @@
 # Cov-Ahead
 
-A new Flutter application.
+A new Flutter application which can be used by merchants or organizations to keep a track of all the people entering their organization/business.
 
 ## Getting Started
 
