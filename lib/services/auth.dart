@@ -57,13 +57,13 @@ class AuthServices {
               address: '',
               vaccineStatus: 0,
             )
-          : MerchDatabaseService(uid: user.uid).updateUserData(
+          : 
+          
+          MerchDatabaseService(uid: user.uid).checkUserData(
               merchantName: user.displayName ?? '',
-              shopName: '',
-              address: '',
               mail: user.email,
               phoneNum: user.phoneNumber ?? '',
-              pinCode: '');
+              );
       return _userFromFireBase(user);
     } catch (e) {
       print(e.toString());

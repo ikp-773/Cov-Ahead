@@ -26,7 +26,6 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Customer Sign In"),
@@ -147,14 +146,19 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     if (_formKey.currentState.validate()) {
                                       await DatabaseService(uid: customer.uid)
                                           .updateUserData(
-                                        name: name ?? customerData.name,
+                                        name: (name == '')
+                                            ? customerData.name
+                                            : name,
                                         mail: customerData.mail,
-                                        phoneNum:
-                                            phoneNum ?? customerData.phoneNum,
-                                        pinCode:
-                                            pinCode ?? customerData.pinCode,
-                                        address:
-                                            address ?? customerData.address,
+                                        phoneNum: (phoneNum == '')
+                                            ? customerData.phoneNum
+                                            : phoneNum,
+                                        pinCode: (pinCode == '')
+                                            ? customerData.pinCode
+                                            : pinCode,
+                                        address: (address == '')
+                                            ? customerData.address
+                                            : address,
                                         vaccineStatus: vaccineStat ??
                                             customerData.vaccineStatus,
                                       );

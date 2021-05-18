@@ -8,6 +8,23 @@ class MerchDatabaseService {
   final CollectionReference<Map<String, dynamic>> merchant =
       FirebaseFirestore.instance.collection('merchants');
 
+  Future checkUserData({
+    String merchantName,
+    String mail,
+    String phoneNum,
+  }) async {
+    var checkMerch = await merchant.doc(uid).get();
+    if (!checkMerch.exists) {
+      updateUserData(
+          merchantName: merchantName,
+          phoneNum: phoneNum ?? '',
+          mail: mail,
+          pinCode: '',
+          address: '',
+          shopName: '');
+    }
+  }
+
   Future updateUserData({
     String merchantName,
     String shopName,

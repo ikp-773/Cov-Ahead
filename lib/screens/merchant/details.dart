@@ -137,12 +137,18 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                           ? merchantData.merchantName
                                           : merchantName,
                                       mail: merchantData.mail,
-                                      phoneNum:
-                                          phoneNum ?? merchantData.phoneNum,
-                                      pinCode: pinCode ?? merchantData.pinCode,
-                                      address: address ?? merchantData.address,
-                                      shopName:
-                                          shopName ?? merchantData.shopName,
+                                      phoneNum: (phoneNum == '')
+                                          ? merchantData.phoneNum
+                                          : phoneNum,
+                                      pinCode: (pinCode == '')
+                                          ? merchantData.pinCode
+                                          : pinCode,
+                                      address: (address == '')
+                                          ? merchantData.address
+                                          : address,
+                                      shopName: (shopName == '')
+                                          ? merchantData.shopName
+                                          : shopName,
                                     );
                                     Get.to(MerchantDashboard());
                                   }
