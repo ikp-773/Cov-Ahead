@@ -1,4 +1,4 @@
-import 'package:covid_qrcode_bfh/screens/customer/home.dart';
+import 'package:covid_qrcode_bfh/screens/customer/details.dart';
 import 'package:covid_qrcode_bfh/screens/customer/sign_in.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +34,13 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
             GestureDetector(
               onTap: () async {
                 dynamic result = await _auth.signInUsingGoogle();
-                Get.off(HomeCustomer());
 
                 if (result == null) {
                   setState(() {
-                    error = 'Could not Sign you in.';
+                    error = 'Could not sign you in using google.';
                   });
+                } else {
+                  Get.off(DetailsCustomer());
                 }
               },
               child: Container(
@@ -117,7 +118,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
             Text(
               'Create an account',
               style: TextStyle(
-                color: Color(0xff633820),
+                color: Colors.black,
                 fontSize: 28,
               ),
               textAlign: TextAlign.center,
@@ -131,7 +132,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                     padding: EdgeInsets.fromLTRB(25, 44, 25, 19),
                     child: TextFormField(
                         style: TextStyle(
-                          color: Color(0xff633820),
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                         decoration: textFieldDecoration,
@@ -146,8 +147,9 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(25, 0, 25, 19),
                     child: TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
                       style: TextStyle(
-                        color: Color(0xff633820),
+                        color: Colors.black,
                         fontSize: 13,
                       ),
                       decoration:
@@ -167,6 +169,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(25, 0, 25, 19),
                     child: TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 13,
@@ -189,11 +192,13 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                         setState(() {});
                         dynamic result =
                             await _auth.signUpUsingEmail(email, password);
-                        Get.off(HomeCustomer());
 
                         if (result == null) {
-                          // loading = false;
-                          setState(() {});
+                          setState(() {
+                            error = 'Sign in failed using email';
+                          });
+                        } else {
+                          Get.off(DetailsCustomer());
                         }
                       }
                     },

@@ -1,7 +1,7 @@
 import 'package:covid_qrcode_bfh/models/customer.dart';
+import 'package:covid_qrcode_bfh/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -20,7 +20,14 @@ class AuthServices {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-  //   DatabaseService(uid: user.uid).updateUserData('', '', '', '');
+      DatabaseService(uid: user.uid).updateUserData(
+        name: user.displayName ?? '',
+        phoneNum: user.phoneNumber ?? '',
+        mail: user.email,
+        pinCode: '',
+        address: '',
+        vaccineStatus: 0,
+      );
       return _userFromFireBase(user);
     } catch (e) {
       print(e.toString());
@@ -39,7 +46,14 @@ class AuthServices {
 
       UserCredential result = await _auth.signInWithCredential(authCredential);
       User user = result.user;
-     // DatabaseService(uid: user.uid).updateUserData('', '', '', '');
+      DatabaseService(uid: user.uid).updateUserData(
+        name: user.displayName ?? '',
+        phoneNum: user.phoneNumber ?? '',
+        mail: user.email,
+        pinCode: '',
+        address: '',
+        vaccineStatus: 0,
+      );
       return _userFromFireBase(user);
     } catch (e) {
       print(e.toString());

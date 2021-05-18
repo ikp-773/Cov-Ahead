@@ -5,40 +5,58 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
-  final CollectionReference customerList =
+  final CollectionReference customer =
       FirebaseFirestore.instance.collection('customers');
 
   Future updateUserData(
-      String name, streetAddress, String state, String postalCode) async {
-    await customerList.doc(uid).set({
+      {String name,
+      String address,
+      String mail,
+      String pinCode,
+      String phoneNum,
+      int vaccineStatus}) async {
+    await customer.doc(uid).set({
       'name': name,
-      'street_address': streetAddress,
-      'state': state,
-      'postal_code': postalCode
+      'address': address,
+      'mail': mail,
+      'pincode': pinCode,
+      'phoneNum': phoneNum,
+      'vaccine_stat': vaccineStatus,
     });
   }
 
   List<CustomerDataModel> _customerListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
+    return snapshot.docs.map((DocumentSnapshot doc) {
+      print(doc.data().toString());
       return CustomerDataModel(
-          // name: doc.data()['name'] ?? '',
-
-          );
+        name: doc.data()['name'] ?? '',
+        mail: doc.data()['mail'] ?? '',
+        address: doc.data()['address'] ?? '',
+        pinCode: doc.data()['pincode'] ?? '',
+        phoneNum: doc.data()['phoneNum'] ?? '',
+        vaccineStatus: doc.data()['vaccine_stat'] ?? 0,
+      );
     }).toList();
   }
 
   CustomerData _customerDataFromSnapshot(DocumentSnapshot snapshot) {
+    print(snapshot.data().toString());
     return CustomerData(
       uid: uid,
-      // name: snapshot.data()['name'],
+      name: snapshot.data()['name'],
+      mail: snapshot.data()['mail'],
+      address: snapshot.data()['address'],
+      pinCode: snapshot.data()['pincode'],
+      phoneNum: snapshot.data()['phoneNum'],
+      vaccineStatus: snapshot.data()['vaccine_stat'],
     );
   }
 
   Stream<List<CustomerDataModel>> get customerDetails {
-    return customerList.snapshots().map(_customerListFromSnapshot);
+    return customer.snapshots().map(_customerListFromSnapshot);
   }
 
   Stream<CustomerData> get customerData {
-    return customerList.doc(uid).snapshots().map(_customerDataFromSnapshot);
+    return customer.doc(uid).snapshots().map(_customerDataFromSnapshot);
   }
 }

@@ -39,11 +39,12 @@ class _SignInCustomerState extends State<SignInCustomer> {
             GestureDetector(
               onTap: () async {
                 dynamic result = await _auth.signInUsingGoogle();
-                Get.to(HomeCustomer());
                 if (result == null) {
                   setState(() {
-                    error = 'Could not Sign In';
+                    error = 'Could not Sign In with Google';
                   });
+                } else {
+                  Get.to(HomeCustomer());
                 }
               },
               child: Container(
@@ -189,11 +190,12 @@ class _SignInCustomerState extends State<SignInCustomer> {
                         setState(() {});
                         dynamic result =
                             await _auth.signInUsingMail(email, password);
-                        Get.off(HomeCustomer());
                         if (result == null) {
                           setState(() {
                             error = 'Could not Sign In with the Credentials';
                           });
+                        } else {
+                          Get.off(HomeCustomer());
                         }
                       }
                     },

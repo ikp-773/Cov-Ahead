@@ -10,7 +10,7 @@ class CustomerData {
   final String phoneNum;
   final String address;
   final String pinCode;
-  final int vaccineStatus; //1-Not Vaccinated 2-Partial, 3- Fully,
+  final int vaccineStatus; //0-Not Vaccinated 1-Partial, 2- Fully,
   CustomerData(
       {this.uid,
       this.vaccineStatus,
@@ -27,7 +27,14 @@ class CustomerDataModel {
   final String phoneNum;
   final String address;
   final String pinCode;
+  final int vaccineStatus; //0-Not Vaccinated 1-Partial, 2- Fully,
 
-  CustomerDataModel(
-      {this.address, this.mail, this.name, this.phoneNum, this.pinCode});
+  CustomerDataModel({
+    this.address,
+    this.mail,
+    this.name,
+    this.phoneNum,
+    this.pinCode,
+    this.vaccineStatus,
+  });
 }

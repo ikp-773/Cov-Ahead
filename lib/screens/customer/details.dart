@@ -1,14 +1,19 @@
+import 'package:covid_qrcode_bfh/models/customer.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
+import 'package:covid_qrcode_bfh/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'home.dart';
 
-class EditDetailsCustomer extends StatefulWidget {
-  EditDetailsCustomer({Key key}) : super(key: key);
+class DetailsCustomer extends StatefulWidget {
+  DetailsCustomer({Key key}) : super(key: key);
 
   @override
-  _EditDetailsCustomerState createState() => _EditDetailsCustomerState();
+  _DetailsCustomerState createState() => _DetailsCustomerState();
 }
 
-class _EditDetailsCustomerState extends State<EditDetailsCustomer> {
+class _DetailsCustomerState extends State<DetailsCustomer> {
   final _formKey = GlobalKey<FormState>();
   final AuthServices _auth = AuthServices();
 
@@ -16,10 +21,12 @@ class _EditDetailsCustomerState extends State<EditDetailsCustomer> {
   String email = '';
   String phoneNum = '';
   String address = '';
-  int value = 1; //For dropdown
+  String pinCode = '';
+  int vaccineStat = 0; //For dropdown
 
   @override
   Widget build(BuildContext context) {
+    final customer = Provider.of<CustomerModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Customer Sign In"),
@@ -29,66 +36,133 @@ class _EditDetailsCustomerState extends State<EditDetailsCustomer> {
           padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
           child: Column(
             children: [
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Name'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Field Cannot be Blank ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          name = value;
-                        });
-                      },
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(labelText: 'Mail ID'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Field Cannot be Blank ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          email = value;
-                        });
-                      },
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(labelText: 'Phone Number'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Enter your Number ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          email = value;
-                        });
-                      },
-                    ),
-                    TextFormField(
-                      minLines: 3,
-                      maxLines: 3,
-                      decoration: InputDecoration(labelText: 'Address'),
-                    ),
-                    // Vaccine status dropdown, needs improvement
-                    DropdownButton(
-                        value: value,
-                        onChanged: (val) {
-                          setState(() {
-                            value = val;
-                          });
-                        },
-                        items: [
-                          DropdownMenuItem(
-                              child: Text('Not vaccinated'), value: 1),
-                          DropdownMenuItem(
-                              child: Text('Taken First Dose'), value: 2),
-                          DropdownMenuItem(
-                              child: Text('Fully vaccinated'), value: 3),
-                        ])
-                  ],
-                ),
-              ),
+              StreamBuilder<CustomerData>(
+                  stream: DatabaseService(uid: customer.uid).customerData,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final customerData = snapshot.data;
+                      print("Data Present");
+                      return Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            TextFormField(
+                              initialValue: customerData.name,
+                              decoration: InputDecoration(labelText: 'Name'),
+                              validator: (value) => value.isEmpty
+                                  ? 'Field Cannot be Blank '
+                                  : null,
+                              onChanged: (value) {
+                                setState(() {
+                                  name = value;
+                                });
+                              },
+                            ),
+                            TextFormField(
+                              initialValue: customerData.mail,
+                              readOnly: true,
+                              decoration: InputDecoration(labelText: 'Mail ID'),
+                              onChanged: (value) {
+                                setState(() {
+                                  email = value;
+                                });
+                              },
+                            ),
+                            TextFormField(
+                              initialValue: customerData.phoneNum ?? '',
+                              keyboardType: TextInputType.phone,
+                              decoration:
+                                  InputDecoration(labelText: 'Phone Number'),
+                              validator: (value) =>
+                                  value.isEmpty ? 'Enter your Number ' : null,
+                              onChanged: (value) {
+                                setState(() {
+                                  phoneNum = value;
+                                });
+                              },
+                            ),
+                            TextFormField(
+                              initialValue: customerData.address ?? '',
+                              minLines: 3,
+                              maxLines: 3,
+                              decoration: InputDecoration(labelText: 'Address'),
+                              validator: (value) => value.isEmpty
+                                  ? 'Enter your Address/Locality'
+                                  : null,
+                              onChanged: (value) {
+                                setState(() {
+                                  address = value;
+                                });
+                              },
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.number,
+                              decoration:
+                                  InputDecoration(labelText: 'Pin Code'),
+                              validator: (value) => value.length != 6
+                                  ? 'Enter your proper pincode '
+                                  : null,
+                              onChanged: (value) {
+                                setState(() {
+                                  pinCode = value;
+                                });
+                              },
+                            ),
+
+                            // Vaccine status dropdown, needs improvement
+                            DropdownButton(
+                              value: customerData.vaccineStatus ?? vaccineStat,
+                              onChanged: (val) {
+                                setState(() {
+                                  vaccineStat = val;
+                                });
+                              },
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Not vaccinated'),
+                                  value: 0,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('Taken First Dose'),
+                                  value: 1,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('Fully vaccinated'),
+                                  value: 2,
+                                ),
+                              ],
+                            ),
+
+                            ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState.validate()) {
+                                  await DatabaseService(uid: customer.uid)
+                                      .updateUserData(
+                                    name: name ?? customerData.name,
+                                    mail: customerData.mail,
+                                    phoneNum: phoneNum ?? customerData.phoneNum,
+                                    pinCode: pinCode ?? customerData.pinCode,
+                                    address: address ?? customerData.address,
+                                    vaccineStatus: vaccineStat ??
+                                        customerData.vaccineStatus,
+                                  );
+                                  Get.to(HomeCustomer());
+                                }
+                              },
+                              child: Text(
+                                'Save',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      print("No Data Available");
+                      return Container();
+                    }
+                  }),
             ],
           ),
         ),
