@@ -29,13 +29,13 @@ class DatabaseService {
     return snapshot.docs.map((DocumentSnapshot doc) {
       print(doc.data().toString());
       return CustomerDataModel(
-        name: doc.data()['name'] ?? '',
-        mail: doc.data()['mail'] ?? '',
-        address: doc.data()['address'] ?? '',
-        pinCode: doc.data()['pincode'] ?? '',
-        phoneNum: doc.data()['phoneNum'] ?? '',
-        vaccineStatus: doc.data()['vaccine_stat'] ?? 0,
-      );
+          // name: doc.data()['name'] ?? '',
+          // mail: doc.data()['mail'] ?? '',
+          // address: doc.data()['address'] ?? '',
+          // pinCode: doc.data()['pincode'] ?? '',
+          // phoneNum: doc.data()['phoneNum'] ?? '',
+          // vaccineStatus: doc.data()['vaccine_stat'] ?? 0,
+          );
     }).toList();
   }
 
@@ -43,12 +43,12 @@ class DatabaseService {
     print(snapshot.data().toString());
     return CustomerData(
       uid: uid,
-      name: snapshot.data()['name'],
-      mail: snapshot.data()['mail'],
-      address: snapshot.data()['address'],
-      pinCode: snapshot.data()['pincode'],
-      phoneNum: snapshot.data()['phoneNum'],
-      vaccineStatus: snapshot.data()['vaccine_stat'],
+      // name: snapshot.data()['name'],
+      // mail: snapshot.data()['mail'],
+      // address: snapshot.data()['address'],
+      // pinCode: snapshot.data()['pincode'],
+      // phoneNum: snapshot.data()['phoneNum'],
+      // vaccineStatus: snapshot.data()['vaccine_stat'],
     );
   }
 
