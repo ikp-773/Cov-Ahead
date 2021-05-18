@@ -22,7 +22,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
   String phoneNum = '';
   String address = '';
   String pinCode = '';
-  int vaccineStat = 0; //For dropdown
+  int vaccineStat; //For dropdown
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +119,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                 // Vaccine status dropdown, needs improvement
                                 DropdownButton(
                                   value:
-                                      customerData.vaccineStatus ?? vaccineStat,
+                                      vaccineStat ?? customerData.vaccineStatus,
                                   onChanged: (val) {
                                     setState(() {
                                       vaccineStat = val;
