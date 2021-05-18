@@ -1,5 +1,6 @@
 import 'package:covid_qrcode_bfh/models/customer.dart';
 import 'package:covid_qrcode_bfh/services/database.dart';
+import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -35,7 +36,8 @@ class AuthServices {
     }
   }
 
-  Future signInUsingGoogle() async {
+  // Since same method is used for 
+  Future signInUsingGoogle({bool isCustomer}) async {
     try {
       GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
       GoogleSignInAuthentication googleSignInAuthentication =
@@ -46,14 +48,22 @@ class AuthServices {
 
       UserCredential result = await _auth.signInWithCredential(authCredential);
       User user = result.user;
-      DatabaseService(uid: user.uid).updateUserData(
-        name: user.displayName ?? '',
-        phoneNum: user.phoneNumber ?? '',
-        mail: user.email,
-        pinCode: '',
-        address: '',
-        vaccineStatus: 0,
-      );
+      isCustomer
+          ? DatabaseService(uid: user.uid).updateUserData(
+              name: user.displayName ?? '',
+              phoneNum: user.phoneNumber ?? '',
+              mail: user.email,
+              pinCode: '',
+              address: '',
+              vaccineStatus: 0,
+            )
+          : MerchDatabaseService(uid: user.uid).updateUserData(
+              merchantName: user.displayName ?? '',
+              shopName: '',
+              address: '',
+              mail: user.email,
+              phoneNum: user.phoneNumber ?? '',
+              pinCode: '');
       return _userFromFireBase(user);
     } catch (e) {
       print(e.toString());

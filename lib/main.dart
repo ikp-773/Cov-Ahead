@@ -15,6 +15,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    //Right now using CustomerModel for both customer and merch
+    // Since only instance var is UID which is available for both
     return StreamProvider<CustomerModel>.value(
       value: AuthServices().user,
       initialData: null,

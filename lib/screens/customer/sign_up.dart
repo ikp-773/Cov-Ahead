@@ -34,9 +34,10 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
           children: [
             GestureDetector(
               onTap: () async {
-                CustomerModel result = await _auth.signInUsingGoogle();
+                CustomerModel result =
+                    await _auth.signInUsingGoogle(isCustomer: true);
 
-                if (result.uid == null) {
+                if (result == null) {
                   setState(() {
                     error = 'Could not sign you in using google.';
                   });

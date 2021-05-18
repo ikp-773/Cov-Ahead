@@ -1,21 +1,28 @@
-import 'package:covid_qrcode_bfh/services/auth.dart';
+import 'package:covid_qrcode_bfh/models/customer.dart';
+import 'package:covid_qrcode_bfh/models/merchant.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
+import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-class EditDetailsMerchant extends StatefulWidget {
-  EditDetailsMerchant({Key key}) : super(key: key);
+class DetailsMerchant extends StatefulWidget {
+  DetailsMerchant({Key key}) : super(key: key);
 
   @override
-  _EditDetailsMerchantState createState() => _EditDetailsMerchantState();
+  _DetailsMerchantState createState() => _DetailsMerchantState();
 }
 
-class _EditDetailsMerchantState extends State<EditDetailsMerchant> {
+class _DetailsMerchantState extends State<DetailsMerchant> {
   final _formKey = GlobalKey<FormState>();
-  final AuthServices _auth = AuthServices();
+  // final AuthServices _auth = AuthServices();
 
-  String name = '';
+  String merchantName = '';
+  String shopName = '';
   String email = '';
   String phoneNum = '';
   String address = '';
+  String pinCode = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,104 +30,139 @@ class _EditDetailsMerchantState extends State<EditDetailsMerchant> {
       appBar: AppBar(
         title: Text("Merchant Details"),
       ),
-      bottomNavigationBar: GestureDetector(
-        onTap: () async {
-          if (_formKey.currentState.validate()) {
-            setState(() {});
-          }
-        },
-        child: Container(
-          padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
-          margin: EdgeInsets.fromLTRB(23, 0, 23, 24),
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          height: 50,
-          width: 600,
-          child: Text(
-            'Go to Dashboard',
-            style: TextStyle(
-              color: Color(0xffffffff),
-              fontSize: 16,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
-          child: Column(
-            children: [
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Merchant Name'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Field Cannot be Blank ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          name = value;
-                        });
-                      },
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Shop Name'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Field Cannot be Blank ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          name = value;
-                        });
-                      },
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(labelText: 'Mail ID'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Field Cannot be Blank ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          email = value;
-                        });
-                      },
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(labelText: 'Phone Number'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Enter your Number ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          email = value;
-                        });
-                      },
-                    ),
-                    TextFormField(
-                      minLines: 3,
-                      maxLines: 3,
-                      decoration: InputDecoration(labelText: 'Shop Address'),
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: 'Pincode'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Field Cannot be Blank ' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          name = value;
-                        });
-                      },
-                    ),
-                    
-                  ],
-                ),
-              ),
-            ],
-          ),
+          child: Consumer<CustomerModel>(builder: (context, merchant, child) {
+            return StreamBuilder<MerchantData>(
+                stream: MerchDatabaseService(uid: merchant?.uid).merchantData,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final merchantData = snapshot.data;
+                    print("Data Present");
+                    return Column(
+                      children: [
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                initialValue: merchantData.merchantName,
+                                decoration:
+                                    InputDecoration(labelText: 'Merchant Name'),
+                                validator: (value) => value.isEmpty
+                                    ? 'Field Cannot be Blank '
+                                    : null,
+                                // onFieldSubmitted: (value) {
+                                //   setState(() {
+                                //     merchantName = value;
+                                //   });
+                                // },
+                                onChanged: (value) {
+                                  setState(() {
+                                    merchantName = value;
+                                  });
+                                },
+                              ),
+                              TextFormField(
+                                initialValue: merchantData.shopName ?? '',
+                                decoration:
+                                    InputDecoration(labelText: 'Shop Name'),
+                                validator: (value) => value.isEmpty
+                                    ? 'Field Cannot be Blank '
+                                    : null,
+                                onChanged: (value) {
+                                  setState(() {
+                                    shopName = value;
+                                  });
+                                },
+                              ),
+                              TextFormField(
+                                initialValue: merchantData.mail,
+                                readOnly: true,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration:
+                                    InputDecoration(labelText: 'Mail ID'),
+                              ),
+                              TextFormField(
+                                initialValue: merchantData.phoneNum ?? '',
+                                keyboardType: TextInputType.phone,
+                                decoration:
+                                    InputDecoration(labelText: 'Phone Number'),
+                                validator: (value) =>
+                                    value.isEmpty ? 'Enter your Number ' : null,
+                                onChanged: (value) {
+                                  setState(() {
+                                    phoneNum = value;
+                                  });
+                                },
+                              ),
+                              TextFormField(
+                                initialValue: merchantData.address ?? '',
+                                minLines: 3,
+                                maxLines: 3,
+                                validator: (value) => value.isEmpty
+                                    ? 'Enter your Address/Locality'
+                                    : null,
+                                onChanged: (value) {
+                                  setState(() {
+                                    address = value;
+                                  });
+                                },
+                                decoration:
+                                    InputDecoration(labelText: 'Shop Address'),
+                              ),
+                              TextFormField(
+                                initialValue: merchantData.pinCode ?? '',
+                                keyboardType: TextInputType.number,
+                                decoration:
+                                    InputDecoration(labelText: 'Pincode'),
+                                validator: (value) => value.isEmpty
+                                    ? 'Enter your proper pincode'
+                                    : null,
+                                onChanged: (value) {
+                                  setState(() {
+                                    pinCode = value;
+                                  });
+                                },
+                              ),
+                              SizedBox(height: 20),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState.validate()) {
+                                    await MerchDatabaseService(
+                                            uid: merchant.uid)
+                                        .updateUserData(
+                                      merchantName: (merchantName == '')
+                                          ? merchantData.merchantName
+                                          : merchantName,
+                                      mail: merchantData.mail,
+                                      phoneNum:
+                                          phoneNum ?? merchantData.phoneNum,
+                                      pinCode: pinCode ?? merchantData.pinCode,
+                                      address: address ?? merchantData.address,
+                                      shopName:
+                                          shopName ?? merchantData.shopName,
+                                    );
+                                    Get.to(MerchantDashboard());
+                                  }
+                                },
+                                child: Text(
+                                  'Save',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    print("No Data Available");
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
+          }),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:covid_qrcode_bfh/screens/customer/home.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,6 @@ class _SignInMerchantState extends State<SignInMerchant> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              
               Text(
                 'Or Login with',
                 style: TextStyle(
@@ -41,11 +41,13 @@ class _SignInMerchantState extends State<SignInMerchant> {
               GestureDetector(
                 onTap: () async {
                   dynamic result = await _auth.signInUsingGoogle();
-                  Get.to(HomeCustomer());
+
                   if (result == null) {
                     setState(() {
                       error = 'Could not Sign In';
                     });
+                  } else {
+                    Get.to(() => MerchantDashboard());
                   }
                 },
                 child: Container(
