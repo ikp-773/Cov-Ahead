@@ -7,7 +7,23 @@ class DatabaseService {
 
   final CollectionReference<Map<String, dynamic>> customer =
       FirebaseFirestore.instance.collection('customers');
-      
+
+  Future checkUserData({
+    String name,
+    String mail,
+    String phoneNum,
+  }) async {
+    var checkMerch = await customer.doc(uid).get();
+    if (!checkMerch.exists) {
+      updateUserData(
+          name: name,
+          phoneNum: phoneNum ?? '',
+          mail: mail,
+          pinCode: '',
+          address: '',
+          vaccineStatus: 0);
+    }
+  }
 
   Future updateUserData(
       {String name,
@@ -26,22 +42,22 @@ class DatabaseService {
     });
   }
 
-  List<CustomerDataModel> _customerListFromSnapshot(QuerySnapshot<Map<String, dynamic>> snapshot) {
+  List<CustomerDataModel> _customerListFromSnapshot(
+      QuerySnapshot<Map<String, dynamic>> snapshot) {
     return snapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
       return CustomerDataModel(
-          name: doc.data()['name'] ?? '',
-          mail: doc.data()['mail'] ?? '',
-          address: doc.data()['address'] ?? '',
-          pinCode: doc.data()['pincode'] ?? '',
-          phoneNum: doc.data()['phoneNum'] ?? '',
-          vaccineStatus: doc.data()['vaccine_stat'] ?? 0,
-          );
+        name: doc.data()['name'] ?? '',
+        mail: doc.data()['mail'] ?? '',
+        address: doc.data()['address'] ?? '',
+        pinCode: doc.data()['pincode'] ?? '',
+        phoneNum: doc.data()['phoneNum'] ?? '',
+        vaccineStatus: doc.data()['vaccine_stat'] ?? 0,
+      );
     }).toList();
   }
 
   CustomerData _customerDataFromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
-
     return CustomerData(
       uid: uid,
       name: snapshot.data()['name'],
@@ -53,7 +69,6 @@ class DatabaseService {
     );
   }
 
-  
   Stream<List<CustomerDataModel>> get customerDetails {
     return customer.snapshots().map(_customerListFromSnapshot);
   }
@@ -63,4 +78,3 @@ class DatabaseService {
     return customer.doc(uid).snapshots().map(_customerDataFromSnapshot);
   }
 }
-

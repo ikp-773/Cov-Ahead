@@ -36,7 +36,7 @@ class AuthServices {
     }
   }
 
-  // Since same method is used for 
+  // Since same method is used for
   Future signInUsingGoogle({bool isCustomer}) async {
     try {
       GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -49,21 +49,16 @@ class AuthServices {
       UserCredential result = await _auth.signInWithCredential(authCredential);
       User user = result.user;
       isCustomer
-          ? DatabaseService(uid: user.uid).updateUserData(
+          ? DatabaseService(uid: user.uid).checkUserData(
               name: user.displayName ?? '',
-              phoneNum: user.phoneNumber ?? '',
               mail: user.email,
-              pinCode: '',
-              address: '',
-              vaccineStatus: 0,
+              phoneNum: user.phoneNumber ?? '',
             )
-          : 
-          
-          MerchDatabaseService(uid: user.uid).checkUserData(
+          : MerchDatabaseService(uid: user.uid).checkUserData(
               merchantName: user.displayName ?? '',
               mail: user.email,
               phoneNum: user.phoneNumber ?? '',
-              );
+            );
       return _userFromFireBase(user);
     } catch (e) {
       print(e.toString());
