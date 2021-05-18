@@ -1,3 +1,4 @@
+import 'package:covid_qrcode_bfh/models/customer.dart';
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
 import 'package:covid_qrcode_bfh/screens/customer/sign_in.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
@@ -33,9 +34,9 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
           children: [
             GestureDetector(
               onTap: () async {
-                dynamic result = await _auth.signInUsingGoogle();
+                CustomerModel result = await _auth.signInUsingGoogle();
 
-                if (result == null) {
+                if (result.uid == null) {
                   setState(() {
                     error = 'Could not sign you in using google.';
                   });

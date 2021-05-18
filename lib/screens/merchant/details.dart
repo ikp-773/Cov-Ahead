@@ -16,13 +16,12 @@ class _EditDetailsMerchantState extends State<EditDetailsMerchant> {
   String email = '';
   String phoneNum = '';
   String address = '';
-  int value = 1; //For dropdown
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Merchant Sign In"),
+        title: Text("Merchant Details"),
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () async {
