@@ -1,10 +1,9 @@
 import 'dart:io';
-import 'dart:async';
-import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
-import 'package:intl/intl.dart';
+
 import 'package:covid_qrcode_bfh/models/customer.dart';
 import 'package:covid_qrcode_bfh/screens/customer/dashboard.dart';
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
+import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:covid_qrcode_bfh/services/customer_database.dart';
 import 'package:flutter/foundation.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
 import 'success.dart';
 
 class HomeCustomer extends StatefulWidget {

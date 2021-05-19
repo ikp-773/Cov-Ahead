@@ -1,7 +1,5 @@
-import 'package:covid_qrcode_bfh/models/merchant.dart';
 import 'package:covid_qrcode_bfh/screens/customer/home.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/details.dart';
-import 'package:covid_qrcode_bfh/screens/merchant/qr_generated.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/sign_in.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -36,38 +34,39 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //START DEBUG
-            GestureDetector(
-              onTap: () {
-                //Authenticates the merchant and fetches MerchantData
-                //from cloud firestore and passes to Generated QR page
+            // GestureDetector(
+            //   onTap: () {
+            //     //Authenticates the merchant and fetches MerchantData
+            //     //from cloud firestore and passes to Generated QR page
 
-                Get.to(() => GeneratedQR(
-                      merchantData: MerchantData(
-                          address: '',
-                          mail: '',
-                          merchantName: 'Deepak',
-                          phoneNum: '',
-                          pinCode: '',
-                          shopName: 'TechnoRivals',
-                          uid: 'uidgoeshereforqrandall'),
-                    ));
-              },
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 23),
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                height: 50,
-                width: 600,
-                child: Text('Go to details'),
-              ),
-            ),
+            //     Get.to(() => GeneratedQR(
+            //           merchantData: MerchantData(
+            //               address: '',
+            //               mail: '',
+            //               merchantName: 'Deepak',
+            //               phoneNum: '',
+            //               pinCode: '',
+            //               shopName: 'TechnoRivals',
+            //               uid: 'uidgoeshereforqrandall'),
+            //         ));
+            //   },
+            //   child: Container(
+            //     margin: EdgeInsets.symmetric(horizontal: 23),
+            //     decoration: BoxDecoration(
+            //       color: Colors.blueAccent,
+            //       borderRadius: BorderRadius.circular(5),
+            //     ),
+            //     height: 50,
+            //     width: 600,
+            //     child: Text('Go to details'),
+            //   ),
+            // ),
 
             //END DEBUG
             GestureDetector(
               onTap: () async {
-                dynamic result = await _auth.signInUsingGoogle(isCustomer: false);
+                dynamic result =
+                    await _auth.signInUsingGoogle(isCustomer: false);
 
                 if (result == null) {
                   setState(() {

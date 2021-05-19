@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_qrcode_bfh/models/merchant.dart';
 
@@ -77,4 +79,22 @@ class MerchDatabaseService {
   Stream<MerchantData> get merchantData {
     return merchant.doc(uid).snapshots().map(_merchantDataFromSnapshot);
   }
+
+  Stream<List<MerchantVisitorLog>> get visitorsLog {
+    return merchant
+        .doc(uid)
+        .collection('visitorsLog')
+        .snapshots()
+        .map(_visitorsLogGeneration);
+  }
+
+  List<MerchantVisitorLog> _visitorsLogGeneration(
+      QuerySnapshot<Map<String, dynamic>> snapshot) {
+    return snapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
+      return MerchantVisitorLog(
+          customerName: doc.data()['customerName'],
+          timestamp: doc.data()['timestamp']?.toDate());
+    }).toList();
+  }
+
 }

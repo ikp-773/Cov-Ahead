@@ -2,6 +2,7 @@ class MerchantModel {
   final String uid;
   MerchantModel({this.uid});
 }
+
 class MerchantData {
   final String uid;
   final String merchantName;
@@ -11,7 +12,13 @@ class MerchantData {
   final String address;
   final String pinCode;
   MerchantData(
-      {this.uid,this.merchantName, this.shopName, this.address,this.mail,this.phoneNum,this.pinCode });
+      {this.uid,
+      this.merchantName,
+      this.shopName,
+      this.address,
+      this.mail,
+      this.phoneNum,
+      this.pinCode});
 }
 
 class MerchantDataModel {
@@ -21,5 +28,13 @@ class MerchantDataModel {
   final String address;
   final String pinCode;
 
-  MerchantDataModel({this.address,this.mail,this.shopName,this.phoneNum,this.pinCode});
+  MerchantDataModel(
+      {this.address, this.mail, this.shopName, this.phoneNum, this.pinCode});
+}
+
+class MerchantVisitorLog {
+  final String customerName;
+  final DateTime timestamp;
+
+  MerchantVisitorLog({this.customerName, this.timestamp});
 }

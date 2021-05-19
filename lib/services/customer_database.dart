@@ -13,8 +13,8 @@ class DatabaseService {
     String mail,
     String phoneNum,
   }) async {
-    var checkMerch = await customer.doc(uid).get();
-    if (!checkMerch.exists) {
+    var checkCustomer = await customer.doc(uid).get();
+    if (!checkCustomer.exists) {
       updateUserData(
         name: name,
         phoneNum: phoneNum ?? '',
@@ -44,9 +44,10 @@ class DatabaseService {
   }
 
   Future updateVistedAreas({String place, String dateTime}) async {
-    await customer.doc(uid).update({
-      // 'places_visited.$place': dateTime,
-    });
+    // await customer.doc(uid).update({
+    //   // 'places_visited.$place': dateTime,
+    // });
+    print('DB data updation called');
   }
 
   List<CustomerDataModel> _customerListFromSnapshot(

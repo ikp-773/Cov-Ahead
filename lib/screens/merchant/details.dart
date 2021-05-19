@@ -39,7 +39,6 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final merchantData = snapshot.data;
-                    print("Data Present");
                     return Column(
                       children: [
                         Form(
