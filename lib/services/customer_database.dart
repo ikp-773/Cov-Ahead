@@ -16,12 +16,13 @@ class DatabaseService {
     var checkMerch = await customer.doc(uid).get();
     if (!checkMerch.exists) {
       updateUserData(
-          name: name,
-          phoneNum: phoneNum ?? '',
-          mail: mail,
-          pinCode: '',
-          address: '',
-          vaccineStatus: 0);
+        name: name,
+        phoneNum: phoneNum ?? '',
+        mail: mail,
+        pinCode: '',
+        address: '',
+        vaccineStatus: 0,
+      );
     }
   }
 
@@ -39,6 +40,12 @@ class DatabaseService {
       'pincode': pinCode,
       'phoneNum': phoneNum,
       'vaccine_stat': vaccineStatus,
+    });
+  }
+
+  Future updateVistedAreas({String place, String dateTime}) async {
+    await customer.doc(uid).update({
+      // 'places_visited.$place': dateTime,
     });
   }
 

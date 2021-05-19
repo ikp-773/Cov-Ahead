@@ -1,5 +1,5 @@
 import 'package:covid_qrcode_bfh/models/customer.dart';
-import 'package:covid_qrcode_bfh/services/database.dart';
+import 'package:covid_qrcode_bfh/services/customer_database.dart';
 import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';

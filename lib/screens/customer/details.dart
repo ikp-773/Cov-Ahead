@@ -1,5 +1,5 @@
 import 'package:covid_qrcode_bfh/models/customer.dart';
-import 'package:covid_qrcode_bfh/services/database.dart';
+import 'package:covid_qrcode_bfh/services/customer_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -162,7 +162,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                         vaccineStatus: vaccineStat ??
                                             customerData.vaccineStatus,
                                       );
-                                      Get.to(HomeCustomer());
+                                      Get.off(HomeCustomer());
                                     }
                                   },
                                   child: Text(
