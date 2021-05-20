@@ -80,7 +80,7 @@ class AuthServices {
 
   void signOut() async {
     try {
-      await googleSignIn.signOut();
+      // await googleSignIn.signOut();
       _auth.signOut();
     } catch (e) {
       print(e.toString());

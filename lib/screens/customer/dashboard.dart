@@ -21,71 +21,77 @@ class _DashboarCustomerState extends State<DashboarCustomer> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserModel>(builder: (context, customer, child) {
-      return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.camera_alt),
-          onPressed: () {
-            Get.off(HomeCustomer());
-          },
-        ),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Row(
-            children: [
-              Text('Customer Home'),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Get.to(DetailsCustomer());
-                },
-                child: Icon(
-                  Icons.settings_rounded,
-                  color: Colors.white,
-                ),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.camera_alt),
+        onPressed: () {
+          Get.off(HomeCustomer());
+        },
+      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            Text('Customer Home'),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                Get.to(DetailsCustomer());
+              },
+              child: Icon(
+                Icons.settings_rounded,
+                color: Colors.white,
               ),
-              SizedBox(width: 15),
-              GestureDetector(
-                onTap: () {
-                  _auth.signOut();
+            ),
+            SizedBox(width: 15),
+            GestureDetector(
+              onTap: () {
+                _auth.signOut();
                 Get.off(MerchantOrCustomer());
-
-                },
-                child: Icon(
-                  Icons.power_settings_new_rounded,
-                  color: Colors.white,
-                ),
+              },
+              child: Icon(
+                Icons.power_settings_new_rounded,
+                color: Colors.white,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        body: StreamBuilder<List<PlacesVisited>>(
-          stream: DatabaseService(uid: customer.uid).placesVisited,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            print('------------>>>>' + snapshot.toString());
+      ),
+      body: Consumer<UserModel>(
+        builder: (context, customer, child) {
+          // Following condition to prevent accessing uid after logging out
+          // Merchant becomes null after logging out, so this is required
+          if (customer == null)
+            return Container();
+          else
+            return StreamBuilder<List<PlacesVisited>>(
+              stream: DatabaseService(uid: customer.uid).placesVisited,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                print('------------>>>>' + snapshot.toString());
 
-            if (snapshot.hasData) {
-              print('------------>>>>' + snapshot.toString());
-              return Center(
-                child: ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    var shopList = snapshot.data;
-                    return ListTile(
-                      title: Text('Store:${shopList[index].storeName}'),
-                      leading: Text('Time:${shopList[index].timestamp}'),
-                    );
-                  },
-                ),
-              );
-            }
-            print('NO data');
-            return CircularProgressIndicator(
-              backgroundColor: Colors.green,
+                if (snapshot.hasData) {
+                  print('------------>>>>' + snapshot.toString());
+                  return Center(
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        var shopList = snapshot.data;
+                        return ListTile(
+                          title: Text('Store:${shopList[index].storeName}'),
+                          leading: Text('Time:${shopList[index].timestamp}'),
+                        );
+                      },
+                    ),
+                  );
+                }
+                print('NO data');
+                return CircularProgressIndicator(
+                  backgroundColor: Colors.green,
+                );
+              },
             );
-          },
-        ),
-      );
-    });
+        },
+      ),
+    );
   }
 }
