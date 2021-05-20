@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:covid_qrcode_bfh/screens/customer/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class _SuccessQRState extends State<SuccessQR> {
   }
 
   void navigationPage() {
-    Get.back();
+    Get.off(DashboarCustomer());
   }
 
   @override
@@ -29,9 +30,10 @@ class _SuccessQRState extends State<SuccessQR> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-          child: Center(child: Text('QR Scanned')),
-        ));
+      backgroundColor: Colors.white,
+      body: Container(
+        child: Center(child: Text('QR Scanned')),
+      ),
+    );
   }
 }

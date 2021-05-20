@@ -1,5 +1,3 @@
-import 'dart:core';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_qrcode_bfh/models/merchant.dart';
 
@@ -96,5 +94,4 @@ class MerchDatabaseService {
           timestamp: doc.data()['timestamp']?.toDate());
     }).toList();
   }
-
 }

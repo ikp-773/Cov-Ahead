@@ -134,7 +134,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
         if (result != null) {
           await DatabaseService(uid: customer.uid).updateVistedAreas(
             place: result.code,
-            dateTime: DateTime.now().toString(),
+            dateTime: DateTime.now(),
           );
           Get.to(SuccessQR());
         }

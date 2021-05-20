@@ -43,11 +43,15 @@ class DatabaseService {
     });
   }
 
-  Future updateVistedAreas({String place, String dateTime}) async {
-    // await customer.doc(uid).update({
-    //   // 'places_visited.$place': dateTime,
-    // });
-    print('DB data updation called');
+  Future updateVistedAreas({String place, DateTime dateTime}) async {
+    try {
+      await customer.doc(uid).collection('places_visited').doc().set({
+        place: dateTime,
+      });
+      print('DB data updation called');
+    } catch (e) {
+      print('ERROR--------->\n\n$e\n\n<-------------------------->');
+    }
   }
 
   List<CustomerDataModel> _customerListFromSnapshot(
@@ -84,5 +88,22 @@ class DatabaseService {
   // For customers
   Stream<CustomerData> get customerData {
     return customer.doc(uid).snapshots().map(_customerDataFromSnapshot);
+  }
+
+  Stream<List<PlacedVisited>> get visitorsLog {
+    return customer
+        .doc(uid)
+        .collection('places_visited')
+        .snapshots()
+        .map(_placesVisited);
+  }
+
+  List<PlacedVisited> _placesVisited(
+      QuerySnapshot<Map<String, dynamic>> snapshot) {
+    return snapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
+      return PlacedVisited(
+          storeName: doc.data()['places_visited'],
+          timestamp: doc.data()['timestamp']?.toDate());
+    }).toList();
   }
 }

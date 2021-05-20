@@ -38,3 +38,10 @@ class CustomerDataModel {
     this.vaccineStatus,
   });
 }
+
+class PlacedVisited {
+  final String storeName;
+  final DateTime timestamp;
+
+  PlacedVisited({this.storeName, this.timestamp});
+}
