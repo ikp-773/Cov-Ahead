@@ -37,7 +37,7 @@ class MerchantOrCustomer extends StatelessWidget {
                   SharedPreferences _sharedPref =
                       await SharedPreferences.getInstance();
                   _sharedPref.setBool('isCustomer', true);
-                  Get.to(SignUpCustomer());
+                  Get.to(()=>SignUpCustomer());
                 },
                 child: Text('Contine as Customer'),
               ),

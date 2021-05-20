@@ -48,6 +48,8 @@ class _DashboarCustomerState extends State<DashboarCustomer> {
               GestureDetector(
                 onTap: () {
                   _auth.signOut();
+                Get.off(MerchantOrCustomer());
+
                 },
                 child: Icon(
                   Icons.power_settings_new_rounded,

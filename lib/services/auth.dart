@@ -36,7 +36,7 @@ class AuthServices {
     }
   }
 
-  // Since same method is used for
+  // Since same method is used for both merch and customer
   Future signInUsingGoogle({bool isCustomer}) async {
     try {
       GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -50,7 +50,6 @@ class AuthServices {
       User user = result.user;
       isCustomer
           ? DatabaseService(uid: user.uid).checkUserData(
-              isCustomer: true,
               name: user.displayName ?? '',
               mail: user.email,
               phoneNum: user.phoneNumber ?? '',
@@ -79,9 +78,10 @@ class AuthServices {
     }
   }
 
-  Future signOut() async {
+  void signOut() async {
     try {
-      return await _auth.signOut();
+      await googleSignIn.signOut();
+      _auth.signOut();
     } catch (e) {
       print(e.toString());
       return null;

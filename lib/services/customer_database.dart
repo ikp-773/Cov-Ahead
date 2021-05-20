@@ -12,12 +12,10 @@ class DatabaseService {
     String name,
     String mail,
     String phoneNum,
-    bool isCustomer,
   }) async {
     var checkCustomer = await customer.doc(uid).get();
     if (!checkCustomer.exists) {
       updateUserData(
-        isCustomer: isCustomer,
         name: name,
         phoneNum: phoneNum ?? '',
         mail: mail,
@@ -29,7 +27,7 @@ class DatabaseService {
   }
 
   Future updateUserData(
-      {bool isCustomer,
+      {
       String name,
       String address,
       String mail,
@@ -37,7 +35,6 @@ class DatabaseService {
       String phoneNum,
       int vaccineStatus}) async {
     await customer.doc(uid).set({
-      'customer': isCustomer,
       'name': name,
       'address': address,
       'mail': mail,
