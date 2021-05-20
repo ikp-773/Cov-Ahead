@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
     // Since only instance var is UID which is available for both
     return StreamProvider<UserModel>.value(
       value: AuthServices().user,
-      initialData: null,
+      //Giving initial data of stream as an empty UserModel instead of null
+      // to avoid confusion in splashscreen FutureBuilder
+      initialData: UserModel(uid: ''),
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

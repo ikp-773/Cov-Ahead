@@ -1,7 +1,10 @@
 import 'package:covid_qrcode_bfh/models/merchant.dart';
 import 'package:covid_qrcode_bfh/models/user.dart';
+import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
+import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class MerchantDashboard extends StatefulWidget {
@@ -10,12 +13,22 @@ class MerchantDashboard extends StatefulWidget {
 }
 
 class _MerchantDashboardState extends State<MerchantDashboard> {
+  final AuthServices _auth = AuthServices();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UserModel>(builder: (context, merchant, child) {
       return Scaffold(
         appBar: AppBar(
           title: Text('Merchant Dashboard'),
+          actions: [
+            IconButton(
+                icon: Icon(Icons.power_settings_new_rounded),
+                onPressed: () {
+                  _auth.signOut();
+                  Get.off(MerchantOrCustomer());
+                })
+          ],
         ),
         body: StreamBuilder<List<MerchantVisitorLog>>(
           stream: MerchDatabaseService(uid: merchant.uid).visitorsLog,

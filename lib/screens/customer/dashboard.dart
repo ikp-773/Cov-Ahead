@@ -1,5 +1,6 @@
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
 import 'package:covid_qrcode_bfh/screens/customer/home.dart';
+import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,6 +43,8 @@ class _DashboarCustomerState extends State<DashboarCustomer> {
             GestureDetector(
               onTap: () {
                 _auth.signOut();
+                Get.off(MerchantOrCustomer());
+
               },
               child: Icon(
                 Icons.power_settings_new_rounded,

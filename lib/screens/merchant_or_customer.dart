@@ -2,6 +2,7 @@ import 'package:covid_qrcode_bfh/screens/customer/sign_up.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MerchantOrCustomer extends StatelessWidget {
   @override
@@ -19,7 +20,10 @@ class MerchantOrCustomer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  SharedPreferences _sharedPref =
+                      await SharedPreferences.getInstance();
+                  _sharedPref.setBool('isCustomer', false);
                   Get.to(() => SignUpMerchant());
                 },
                 child: Text('Contine as Merchant'),
@@ -29,7 +33,10 @@ class MerchantOrCustomer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async{
+                  SharedPreferences _sharedPref =
+                      await SharedPreferences.getInstance();
+                  _sharedPref.setBool('isCustomer', true);
                   Get.to(SignUpCustomer());
                 },
                 child: Text('Contine as Customer'),
