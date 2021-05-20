@@ -127,20 +127,20 @@ class _HomeCustomerState extends State<HomeCustomer> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen(
-      (scanData) {
-        setState(() async {
+      (scanData) async {
+        setState(() {
           result = scanData;
-          print(
-              '\n-------------\n\nBarcode Type: ${describeEnum(result.format)}   Data: ${result.code}');
-          if (result.code != null) {
-            controller.dispose();
-            await DatabaseService(uid: user.uid).updateVistedAreas(
-              storeName: result.code,
-              dateTime: DateTime.now(),
-            );
-            Get.off(SuccessQR());
-          }
         });
+        print(
+            '\n-------------\n\nBarcode Type: ${describeEnum(result.format)}   Data: ${result.code}');
+        if (result.code != null) {
+          controller.dispose();
+          await DatabaseService(uid: user.uid).updateVistedAreas(
+            storeName: result.code,
+            dateTime: DateTime.now(),
+          );
+          Get.off(SuccessQR());
+        }
       },
     );
   }

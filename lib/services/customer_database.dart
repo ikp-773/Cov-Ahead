@@ -27,8 +27,7 @@ class DatabaseService {
   }
 
   Future updateUserData(
-      {
-      String name,
+      {String name,
       String address,
       String mail,
       String pinCode,
@@ -115,7 +114,7 @@ class DatabaseService {
     return snapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
       return PlacesVisited(
         storeName: doc.data()['storeName'],
-        timestamp: doc.data()['timestamp'],
+        timestamp: doc.data()['timestamp']?.toDate(),
       );
     }).toList();
   }
