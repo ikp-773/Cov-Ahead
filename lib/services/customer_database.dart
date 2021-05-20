@@ -12,10 +12,12 @@ class DatabaseService {
     String name,
     String mail,
     String phoneNum,
+    bool isCustomer,
   }) async {
     var checkCustomer = await customer.doc(uid).get();
     if (!checkCustomer.exists) {
       updateUserData(
+        isCustomer: isCustomer,
         name: name,
         phoneNum: phoneNum ?? '',
         mail: mail,
@@ -45,11 +47,13 @@ class DatabaseService {
     });
   }
 
-  Future updateVistedAreas({String place, DateTime dateTime}) async {
+  Future updateVistedAreas({String storeName, DateTime dateTime}) async {
     try {
-      await customer.doc(uid).collection('places_visited').doc().set({
-        place: dateTime,
-      });
+      await customer
+          .doc(uid)
+          .collection('places_visited')
+          .doc()
+          .set({'storeName': storeName, 'timestamp': dateTime});
       print('DB data updation called');
     } catch (e) {
       print('ERROR--------->\n\n$e\n\n<-------------------------->');
@@ -101,7 +105,7 @@ class DatabaseService {
     return customer.doc(uid).snapshots().map(_customerDataFromSnapshot);
   }
 
-  Stream<List<PlacedVisited>> get visitorsLog {
+  Stream<List<PlacesVisited>> get placesVisited {
     return customer
         .doc(uid)
         .collection('places_visited')
@@ -109,12 +113,13 @@ class DatabaseService {
         .map(_placesVisited);
   }
 
-  List<PlacedVisited> _placesVisited(
+  List<PlacesVisited> _placesVisited(
       QuerySnapshot<Map<String, dynamic>> snapshot) {
     return snapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
-      return PlacedVisited(
-          storeName: doc.data()['places_visited'],
-          timestamp: doc.data()['timestamp']?.toDate());
+      return PlacesVisited(
+        storeName: doc.data()['storeName'],
+        timestamp: doc.data()['timestamp'],
+      );
     }).toList();
   }
 }

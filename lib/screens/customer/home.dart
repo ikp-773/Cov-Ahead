@@ -135,7 +135,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
           if (result.code != null) {
             controller.dispose();
             await DatabaseService(uid: user.uid).updateVistedAreas(
-              place: result.code,
+              storeName: result.code,
               dateTime: DateTime.now(),
             );
             Get.off(SuccessQR());
