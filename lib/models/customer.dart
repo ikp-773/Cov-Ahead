@@ -34,9 +34,9 @@ class CustomerDataModel {
   });
 }
 
-class PlacedVisited {
+class PlacesVisited {
   final String storeName;
   final DateTime timestamp;
 
-  PlacedVisited({this.storeName, this.timestamp});
+  PlacesVisited({this.storeName, this.timestamp});
 }
