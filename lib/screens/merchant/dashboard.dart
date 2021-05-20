@@ -27,7 +27,8 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(snapshot.data[index].timestamp.toString()),
+                      title: Text(snapshot.data[index].customerName),
+                      leading: Text(snapshot.data[index].timestamp.toString()),
                     );
                   },
                 ),

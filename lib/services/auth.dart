@@ -50,6 +50,7 @@ class AuthServices {
       User user = result.user;
       isCustomer
           ? DatabaseService(uid: user.uid).checkUserData(
+              isCustomer: true,
               name: user.displayName ?? '',
               mail: user.email,
               phoneNum: user.phoneNumber ?? '',

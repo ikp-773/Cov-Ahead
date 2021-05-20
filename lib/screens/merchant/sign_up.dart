@@ -223,7 +223,7 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                         setState(() {});
                         dynamic result =
                             await _auth.signUpUsingEmail(email, password);
-                        Get.off(HomeCustomer());
+                        Get.off(() => HomeCustomer());
 
                         if (result == null) {
                           // loading = false;
