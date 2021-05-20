@@ -1,8 +1,3 @@
-class CustomerModel {
-  final String uid;
-  CustomerModel({this.uid});
-}
-
 class CustomerData {
   final String uid;
   final String name;

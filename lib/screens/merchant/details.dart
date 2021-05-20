@@ -1,5 +1,5 @@
-import 'package:covid_qrcode_bfh/models/customer.dart';
 import 'package:covid_qrcode_bfh/models/merchant.dart';
+import 'package:covid_qrcode_bfh/models/user.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
 import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
-          child: Consumer<CustomerModel>(builder: (context, merchant, child) {
+          child: Consumer<UserModel>(builder: (context, merchant, child) {
             return StreamBuilder<MerchantData>(
                 stream: MerchDatabaseService(uid: merchant?.uid).merchantData,
                 builder: (context, snapshot) {

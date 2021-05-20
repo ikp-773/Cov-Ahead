@@ -1,4 +1,5 @@
 import 'package:covid_qrcode_bfh/models/customer.dart';
+import 'package:covid_qrcode_bfh/models/user.dart';
 import 'package:covid_qrcode_bfh/services/customer_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
           padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
           child: Column(
             children: [
-              Consumer<CustomerModel>(
+              Consumer<UserModel>(
                 builder: (context, customer, child) {
                   return StreamBuilder<CustomerData>(
                       stream: DatabaseService(uid: customer?.uid).customerData,

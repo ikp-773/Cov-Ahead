@@ -27,13 +27,15 @@ class DatabaseService {
   }
 
   Future updateUserData(
-      {String name,
+      {bool isCustomer,
+      String name,
       String address,
       String mail,
       String pinCode,
       String phoneNum,
       int vaccineStatus}) async {
     await customer.doc(uid).set({
+      'customer': isCustomer,
       'name': name,
       'address': address,
       'mail': mail,
@@ -52,6 +54,15 @@ class DatabaseService {
     } catch (e) {
       print('ERROR--------->\n\n$e\n\n<-------------------------->');
     }
+  }
+
+  Future<bool> isUserCustomer() async {
+    bool isCus;
+    await customer
+        .doc(uid)
+        .get()
+        .then((value) => {isCus = value.data()['customer']});
+    return isCus;
   }
 
   List<CustomerDataModel> _customerListFromSnapshot(

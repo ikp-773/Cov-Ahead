@@ -1,4 +1,5 @@
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
+import 'package:covid_qrcode_bfh/screens/customer/home.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class _DashboarCustomerState extends State<DashboarCustomer> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
         onPressed: () {
-          Get.back();
+          Get.off(HomeCustomer());
         },
       ),
       appBar: AppBar(

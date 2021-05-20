@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:covid_qrcode_bfh/models/customer.dart';
+import 'package:covid_qrcode_bfh/models/user.dart';
 import 'package:covid_qrcode_bfh/screens/customer/dashboard.dart';
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
 import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
@@ -26,7 +26,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode result;
   QRViewController controller;
-  var customer;
+  var user;
 
   @override
   void reassemble() {
@@ -39,13 +39,13 @@ class _HomeCustomerState extends State<HomeCustomer> {
 
   @override
   void dispose() {
-    controller?.dispose();
+    controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    customer = Provider.of<CustomerModel>(context);
+    user = Provider.of<UserModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -126,19 +126,22 @@ class _HomeCustomerState extends State<HomeCustomer> {
     setState(() {
       this.controller = controller;
     });
-    controller.scannedDataStream.listen((scanData) {
-      setState(() async {
-        result = scanData;
-        print(
-            '\n-------------\n\nBarcode Type: ${describeEnum(result.format)}   Data: ${result.code}');
-        if (result != null) {
-          await DatabaseService(uid: customer.uid).updateVistedAreas(
-            place: result.code,
-            dateTime: DateTime.now(),
-          );
-          Get.to(SuccessQR());
-        }
-      });
-    });
+    controller.scannedDataStream.listen(
+      (scanData) {
+        setState(() async {
+          result = scanData;
+          print(
+              '\n-------------\n\nBarcode Type: ${describeEnum(result.format)}   Data: ${result.code}');
+          if (result.code != null) {
+            controller.dispose();
+            await DatabaseService(uid: user.uid).updateVistedAreas(
+              place: result.code,
+              dateTime: DateTime.now(),
+            );
+            Get.off(SuccessQR());
+          }
+        });
+      },
+    );
   }
 }

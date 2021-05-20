@@ -1,4 +1,4 @@
-import 'package:covid_qrcode_bfh/models/customer.dart';
+import 'package:covid_qrcode_bfh/models/user.dart';
 import 'package:covid_qrcode_bfh/services/customer_database.dart';
 import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,11 +8,11 @@ class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = new GoogleSignIn();
 
-  CustomerModel _userFromFireBase(User user) {
-    return user != null ? CustomerModel(uid: user.uid) : null;
+  UserModel _userFromFireBase(User user) {
+    return user != null ? UserModel(uid: user.uid) : null;
   }
 
-  Stream<CustomerModel> get user {
+  Stream<UserModel> get user {
     return _auth.authStateChanges().map((User user) => _userFromFireBase(user));
   }
 
