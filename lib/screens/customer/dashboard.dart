@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class DashboarCustomer extends StatefulWidget {
-  DashboarCustomer({Key key}) : super(key: key);
+class DashboardCustomer extends StatefulWidget {
+  DashboardCustomer({Key key}) : super(key: key);
 
   @override
-  _DashboarCustomerState createState() => _DashboarCustomerState();
+  _DashboardCustomerState createState() => _DashboardCustomerState();
 }
 
-class _DashboarCustomerState extends State<DashboarCustomer> {
+class _DashboardCustomerState extends State<DashboardCustomer> {
   final AuthServices _auth = AuthServices();
 
   @override
@@ -83,7 +83,7 @@ class _DashboarCustomerState extends State<DashboarCustomer> {
                       },
                     ),
                   );
-                }   
+                }
                 print('NO data');
                 return CircularProgressIndicator(
                   backgroundColor: Colors.green,

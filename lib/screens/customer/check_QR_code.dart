@@ -17,7 +17,7 @@ class CheckQR extends StatefulWidget {
 
 class _CheckQRState extends State<CheckQR> {
   void navigationPage() {
-    Get.off(DashboarCustomer());
+    Get.off(DashboardCustomer());
   }
 
   @override
@@ -32,7 +32,7 @@ class _CheckQRState extends State<CheckQR> {
             if (snapshot.hasData) {
               if (snapshot.data) {
                 Timer(Duration(seconds: 5),
-                    () => Get.off(() => DashboarCustomer()));
+                    () => Get.off(() => DashboardCustomer()));
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

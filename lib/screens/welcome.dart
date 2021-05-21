@@ -1,5 +1,4 @@
 import 'package:covid_qrcode_bfh/models/user.dart';
-import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,8 +7,7 @@ import 'customer/home.dart';
 import 'merchant/dashboard.dart';
 import 'merchant_or_customer.dart';
 
-class SplashScreen extends StatelessWidget {
-
+class Welcome extends StatelessWidget {
   // Loading customer or merchant data
   Future<bool> isCust() async {
     bool isCustomer = true;

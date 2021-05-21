@@ -87,7 +87,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
           ),
           ElevatedButton(
             onPressed: () {
-              Get.to(DashboarCustomer());
+              Get.to(DashboardCustomer());
             },
             child: Text(
               'Shops Visited',
@@ -134,7 +134,10 @@ class _HomeCustomerState extends State<HomeCustomer> {
         if (result.code != null) {
           controller.dispose();
           // Get.off(SuccessQR());
-          Get.off(CheckQR(code: result.code,customerUID: user.uid,));
+          Get.off(CheckQR(
+            code: result.code,
+            customerUID: user.uid,
+          ));
           // await DatabaseService(uid: user.uid).updateVistedAreas(
           //   storeName: result.code,
           //   dateTime: DateTime.now(),

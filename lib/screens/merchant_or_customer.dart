@@ -11,8 +11,8 @@ class MerchantOrCustomer extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
             image: const DecorationImage(
-                image:
-                    NetworkImage('https://wallpaperaccess.com/full/885189.png'),
+                image: NetworkImage(
+                    'https://c4.wallpaperflare.com/wallpaper/683/498/374/blurred-colorful-vertical-portrait-display-wallpaper-preview.jpg'),
                 fit: BoxFit.fill)),
         width: Get.width,
         child: Column(
@@ -27,7 +27,7 @@ class MerchantOrCustomer extends StatelessWidget {
               style: TextStyle(
                   fontFamily: 'SourceSansPro',
                   fontSize: 32,
-                  color: Colors.blue),
+                  color: Colors.purple),
             ),
             SizedBox(
               height: 200.0,
@@ -40,11 +40,17 @@ class MerchantOrCustomer extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: ElevatedButton(
                 style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Colors.purple.shade400;
+                        return Colors.purple.shade700;
+                      },
+                    ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                  side: BorderSide(color: Colors.blue),
-                ))),
+                      borderRadius: BorderRadius.circular(18.0),
+                    ))),
                 onPressed: () async {
                   SharedPreferences _sharedPref =
                       await SharedPreferences.getInstance();
@@ -65,16 +71,23 @@ class MerchantOrCustomer extends StatelessWidget {
             ),
             Text(
               'OR',
-              style: TextStyle(color: Colors.blueAccent),
+              style: TextStyle(color: Colors.purple.shade700),
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: ElevatedButton(
                 style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Colors.purple.shade400;
+                        return Colors.purple.shade700;
+                      },
+                    ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.blue)))),
+                      borderRadius: BorderRadius.circular(18.0),
+                    ))),
                 onPressed: () async {
                   SharedPreferences _sharedPref =
                       await SharedPreferences.getInstance();
@@ -99,3 +112,4 @@ class MerchantOrCustomer extends StatelessWidget {
     );
   }
 }
+//https://wallpaperaccess.com/full/885189.png
