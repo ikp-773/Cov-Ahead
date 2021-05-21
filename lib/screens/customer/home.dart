@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:covid_qrcode_bfh/models/user.dart';
+import 'package:covid_qrcode_bfh/screens/customer/check_QR_code.dart';
 import 'package:covid_qrcode_bfh/screens/customer/dashboard.dart';
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
 import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
@@ -135,11 +136,12 @@ class _HomeCustomerState extends State<HomeCustomer> {
             '\n-------------\n\nBarcode Type: ${describeEnum(result.format)}   Data: ${result.code}');
         if (result.code != null) {
           controller.dispose();
-          await DatabaseService(uid: user.uid).updateVistedAreas(
-            storeName: result.code,
-            dateTime: DateTime.now(),
-          );
-          Get.off(SuccessQR());
+          // Get.off(SuccessQR());
+          Get.off(CheckQR(code: result.code,customerUID: user.uid,));
+          // await DatabaseService(uid: user.uid).updateVistedAreas(
+          //   storeName: result.code,
+          //   dateTime: DateTime.now(),
+          // );
         }
       },
     );

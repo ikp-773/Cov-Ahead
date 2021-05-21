@@ -56,13 +56,10 @@ class DatabaseService {
     }
   }
 
-  Future<bool> isUserCustomer() async {
-    bool isCus;
-    await customer
-        .doc(uid)
-        .get()
-        .then((value) => {isCus = value.data()['customer']});
-    return isCus;
+// Fetch customer name for adding to merchant db
+  Future<String> getCustomerName() async {
+    DocumentSnapshot<Map<String, dynamic>> _doc = await customer.doc(uid).get();
+    return _doc.data()['name'];
   }
 
   List<CustomerDataModel> _customerListFromSnapshot(

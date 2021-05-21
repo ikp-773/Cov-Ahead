@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_qrcode_bfh/models/merchant.dart';
+import 'package:covid_qrcode_bfh/services/customer_database.dart';
+import 'package:flutter/material.dart';
 
 class MerchDatabaseService {
   final String uid;
@@ -84,6 +86,42 @@ class MerchDatabaseService {
         .collection('visitorsLog')
         .snapshots()
         .map(_visitorsLogGeneration);
+  }
+
+  // On succesfull QR code scanning, verification done here
+  Future<bool> isMerchantPresent({String customerUID}) async {
+    bool returnVal = false;
+    QuerySnapshot<Map<String, dynamic>> querySnap = await merchant.get();
+    querySnap.docs.forEach((queryDocSnap) async {
+      // Comparing with all merchant uid
+      if (queryDocSnap.id == uid) {
+        returnVal = true;
+        DatabaseService _customerDb = DatabaseService(uid: customerUID);
+        DateTime _currentTime = DateTime.now();
+
+        // Updating in customer
+        _customerDb.updateVistedAreas(
+          storeName: queryDocSnap.data()['shopName'],
+          dateTime: _currentTime,
+        );
+
+        // Fetching customer name to add in merchant visitor log
+        String customerName = await _customerDb.getCustomerName();
+        addCustomerVisit(customerName: customerName, timestamp: _currentTime);
+      }
+    });
+    return returnVal;
+  }
+
+  // Adding customer visit to visitorsLog in merchant collection
+  Future<bool> addCustomerVisit(
+      {String customerName, DateTime timestamp}) async {
+    await merchant
+        .doc(uid)
+        .collection('visitorsLog')
+        .doc()
+        .set({'customerName': customerName, 'timestamp': timestamp});
+    return true;
   }
 
   List<MerchantVisitorLog> _visitorsLogGeneration(
