@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:covid_qrcode_bfh/screens/customer/dashboard.dart';
+import 'package:covid_qrcode_bfh/screens/customer/home.dart';
 import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,14 +28,55 @@ class _CheckQRState extends State<CheckQR> {
         child: FutureBuilder(
           future: MerchDatabaseService(uid: widget.code)
               .isMerchantPresent(customerUID: widget.customerUID),
-          // initialData: InitialData,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  print('------------>>>>' + snapshot.toString());
+            if (snapshot.hasData) {
+              if (snapshot.data) {
+                Timer(Duration(seconds: 5),
+                    () => Get.off(() => DashboarCustomer()));
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.verified,
+                      color: Colors.green,
+                    ),
+                    SizedBox(height: 20),
 
-            if (snapshot.connectionState == ConnectionState.waiting)
-              {return CircularProgressIndicator();}
+                    // Add some other success text here
+                    Text('Success! You can continue shopping'),
+                    SizedBox(height: 20),
+                    Text(
+                      'You will be now redirected to dashboard',
+                      style: TextStyle(fontWeight: FontWeight.w100),
+                    )
+                  ],
+                );
+              } else {
+                Timer(
+                    Duration(seconds: 3), () => Get.off(() => HomeCustomer()));
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.error,
+                      color: Colors.red,
+                      size: 20,
+                    ),
+                    SizedBox(height: 20),
 
-            return Text(snapshot.data.toString());
+                    // Add some other success text here
+                    Text('Try scanning the QR code again'),
+                    SizedBox(height: 20),
+
+                    Text(
+                      'You will be redirected to QR code scanner',
+                      style: TextStyle(fontWeight: FontWeight.w100),
+                    )
+                  ],
+                );
+              }
+            }
+            return CircularProgressIndicator();
           },
         ),
       ),
