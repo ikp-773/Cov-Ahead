@@ -1,22 +1,24 @@
-import 'package:covid_qrcode_bfh/screens/customer/home.dart';
-import 'package:covid_qrcode_bfh/screens/merchant/details.dart';
-import 'package:covid_qrcode_bfh/screens/merchant/sign_in.dart';
+import 'package:covid_qrcode_bfh/models/user.dart';
+import 'package:covid_qrcode_bfh/screens/authentication/sign_in.dart';
+import 'package:covid_qrcode_bfh/screens/customer/details.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'constants.dart';
 
-class SignUpMerchant extends StatefulWidget {
-  SignUpMerchant({Key key, this.title}) : super(key: key);
+class SignUp extends StatefulWidget {
+  final bool isCustomer;
+  SignUp({Key key, this.title, this.isCustomer}) : super(key: key);
 
   final String title;
 
   @override
-  _SignUpMerchantState createState() => _SignUpMerchantState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignUpMerchantState extends State<SignUpMerchant> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final AuthServices _auth = AuthServices();
 
@@ -27,59 +29,31 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: SingleChildScrollView(
+      backgroundColor: Color(0xfffcf5ff),
+      bottomNavigationBar: SizedBox(
+        height: 90,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //START DEBUG
-            // GestureDetector(
-            //   onTap: () {
-            //     //Authenticates the merchant and fetches MerchantData
-            //     //from cloud firestore and passes to Generated QR page
-
-            //     Get.to(() => GeneratedQR(
-            //           merchantData: MerchantData(
-            //               address: '',
-            //               mail: '',
-            //               merchantName: 'Deepak',
-            //               phoneNum: '',
-            //               pinCode: '',
-            //               shopName: 'TechnoRivals',
-            //               uid: 'uidgoeshereforqrandall'),
-            //         ));
-            //   },
-            //   child: Container(
-            //     margin: EdgeInsets.symmetric(horizontal: 23),
-            //     decoration: BoxDecoration(
-            //       color: Colors.blueAccent,
-            //       borderRadius: BorderRadius.circular(5),
-            //     ),
-            //     height: 50,
-            //     width: 600,
-            //     child: Text('Go to details'),
-            //   ),
-            // ),
-
-            //END DEBUG
             GestureDetector(
               onTap: () async {
-                dynamic result =
-                    await _auth.signInUsingGoogle(isCustomer: false);
+                UserModel result = await _auth.signInUsingGoogle(
+                    isCustomer: widget.isCustomer);
 
                 if (result == null) {
                   setState(() {
-                    error = 'Could not Sign you in.';
+                    error = 'Could not sign you in using google.';
                   });
+                } else if (widget.isCustomer) {
+                  Get.off(DetailsCustomer());
                 } else {
-                  Get.to(DetailsMerchant());
+                  Get.off(MerchantDashboard());
                 }
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 23),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.purple[700],
                   borderRadius: BorderRadius.circular(5),
                 ),
                 height: 50,
@@ -96,18 +70,19 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                     Container(
                       width: .5,
                       height: 60,
-                      margin: EdgeInsets.fromLTRB(0, 10, 35, 10),
-                      color: Color(0x40ffffff),
+                      margin: EdgeInsets.fromLTRB(0, 10, 15, 10),
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                       child: Text(
                         'Continue with Google',
                         style: TextStyle(
+                          fontWeight: FontWeight.w600,
                           color: Color(0xffffffff),
                           fontSize: 16,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                       ),
                     ),
                   ],
@@ -127,12 +102,14 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(SignInMerchant());
+                    Get.to(SignIn(
+                      isCustomer: widget.isCustomer,
+                    ));
                   },
                   child: Text(
                     'log in ',
                     style: TextStyle(
-                      color: Colors.blue[800],
+                      color: Colors.purple[800],
                       fontSize: 15,
                     ),
                   ),
@@ -147,12 +124,13 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 150),
             Text(
               'Create an account',
               style: TextStyle(
-                color: Color(0xff633820),
-                fontSize: 28,
+                fontFamily: 'ChelaOne',
+                color: Colors.black,
+                fontSize: 38,
               ),
               textAlign: TextAlign.center,
             ),
@@ -165,10 +143,10 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                     padding: EdgeInsets.fromLTRB(25, 44, 25, 19),
                     child: TextFormField(
                         style: TextStyle(
-                          color: Color(0xff633820),
                           fontSize: 13,
                         ),
-                        decoration: textFieldDecoration,
+                        decoration:
+                            textFieldDecoration.copyWith(labelText: 'Email'),
                         validator: (value) =>
                             value.isEmpty ? 'Enter a valid email' : null,
                         onChanged: (value) {
@@ -180,12 +158,13 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(25, 0, 25, 19),
                     child: TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
                       style: TextStyle(
-                        color: Color(0xff633820),
+                        color: Colors.black,
                         fontSize: 13,
                       ),
                       decoration:
-                          textFieldDecoration.copyWith(hintText: 'Password'),
+                          textFieldDecoration.copyWith(labelText: 'Password'),
                       validator: (value) =>
                           value.length < 6 ? 'Minimum 6 characters' : null,
                       obscureText: true,
@@ -201,12 +180,13 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(25, 0, 25, 19),
                     child: TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 13,
                       ),
                       decoration: textFieldDecoration.copyWith(
-                          hintText: 'Confirm Password'),
+                          labelText: 'Confirm Password'),
                       validator: (value) =>
                           value != password ? 'Passwords doesn\'t match' : null,
                       obscureText: true,
@@ -222,14 +202,16 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                       if (_formKey.currentState.validate()) {
                         setState(() {});
                         dynamic result = await _auth.signUpUsingEmail(
-                            email, password, false);
+                            email, password, widget.isCustomer);
 
                         if (result == null) {
                           setState(() {
-                            error = 'Could not Sign you in.';
+                            error = 'Sign up failed using email';
                           });
+                        } else if (widget.isCustomer) {
+                          Get.off(DetailsCustomer());
                         } else {
-                          Get.off(() => DetailsMerchant());
+                          Get.off(MerchantDashboard());
                         }
                       }
                     },
@@ -238,16 +220,17 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                         padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                         margin: EdgeInsets.symmetric(horizontal: 23),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Colors.purple[500],
                           borderRadius: BorderRadius.circular(5),
                         ),
                         height: 50,
                         width: 600,
                         child: Text(
-                          'Get started',
+                          'Get Started',
                           style: TextStyle(
                             color: Color(0xffffffff),
                             fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
                         ),

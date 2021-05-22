@@ -57,6 +57,8 @@ class MerchDatabaseService {
     }).toList();
   }
 
+  
+
   MerchantData _merchantDataFromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return MerchantData(

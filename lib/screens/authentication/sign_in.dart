@@ -1,16 +1,22 @@
+import 'package:covid_qrcode_bfh/models/user.dart';
 import 'package:covid_qrcode_bfh/screens/customer/home.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'constants.dart';
 
-class SignInCustomer extends StatefulWidget {
+class SignIn extends StatefulWidget {
+  final bool isCustomer;
+
+  const SignIn({Key key, this.isCustomer}) : super(key: key);
+
   @override
-  _SignInCustomerState createState() => _SignInCustomerState();
+  _SignInState createState() => _SignInState();
 }
 
-class _SignInCustomerState extends State<SignInCustomer> {
+class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   final AuthServices _auth = AuthServices();
 
@@ -38,13 +44,16 @@ class _SignInCustomerState extends State<SignInCustomer> {
             SizedBox(height: 20),
             GestureDetector(
               onTap: () async {
-                dynamic result = await _auth.signInUsingGoogle();
+                UserModel result = await _auth.signInUsingGoogle(
+                    isCustomer: widget.isCustomer);
                 if (result == null) {
                   setState(() {
                     error = 'Could not Sign In with Google';
                   });
-                } else {
+                } else if (widget.isCustomer) {
                   Get.off(HomeCustomer());
+                } else {
+                  Get.off(MerchantDashboard());
                 }
               },
               child: Container(
@@ -196,8 +205,10 @@ class _SignInCustomerState extends State<SignInCustomer> {
                           setState(() {
                             error = 'Could not Sign In with the Credentials';
                           });
-                        } else {
+                        } else if (widget.isCustomer) {
                           Get.off(HomeCustomer());
+                        } else {
+                          Get.off(MerchantDashboard());
                         }
                       }
                     },
