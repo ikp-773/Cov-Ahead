@@ -16,19 +16,28 @@ class AuthServices {
     return _auth.authStateChanges().map((User user) => _userFromFireBase(user));
   }
 
-  Future signUpUsingEmail(email, password) async {
+  Future signUpUsingEmail(email, password, bool isCustomer) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      DatabaseService(uid: user.uid).updateUserData(
-        name: user.displayName ?? '',
-        phoneNum: user.phoneNumber ?? '',
-        mail: user.email,
-        pinCode: '',
-        address: '',
-        vaccineStatus: 0,
-      );
+      isCustomer
+          ? DatabaseService(uid: user.uid).updateUserData(
+              name: user.displayName ?? '',
+              phoneNum: user.phoneNumber ?? '',
+              mail: user.email,
+              pinCode: '',
+              address: '',
+              vaccineStatus: 0,
+            )
+          : MerchDatabaseService(uid: user.uid).updateUserData(
+              merchantName: user.displayName ?? '',
+              phoneNum: user.phoneNumber ?? '',
+              mail: user.email,
+              pinCode: '',
+              address: '',
+              shopName: '',
+            );
       return _userFromFireBase(user);
     } catch (e) {
       print(e.toString());
@@ -80,7 +89,7 @@ class AuthServices {
 
   void signOut() async {
     try {
-      // await googleSignIn.signOut();
+      await googleSignIn.signOut();
       _auth.signOut();
     } catch (e) {
       print(e.toString());

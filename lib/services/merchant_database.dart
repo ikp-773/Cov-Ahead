@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_qrcode_bfh/models/merchant.dart';
 import 'package:covid_qrcode_bfh/services/customer_database.dart';
-import 'package:flutter/material.dart';
 
 class MerchDatabaseService {
   final String uid;

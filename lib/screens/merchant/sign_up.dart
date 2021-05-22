@@ -221,13 +221,15 @@ class _SignUpMerchantState extends State<SignUpMerchant> {
                     onTap: () async {
                       if (_formKey.currentState.validate()) {
                         setState(() {});
-                        dynamic result =
-                            await _auth.signUpUsingEmail(email, password);
-                        Get.off(() => HomeCustomer());
+                        dynamic result = await _auth.signUpUsingEmail(
+                            email, password, false);
 
                         if (result == null) {
-                          // loading = false;
-                          setState(() {});
+                          setState(() {
+                            error = 'Could not Sign you in.';
+                          });
+                        } else {
+                          Get.off(() => DetailsMerchant());
                         }
                       }
                     },

@@ -194,7 +194,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                       if (_formKey.currentState.validate()) {
                         setState(() {});
                         dynamic result =
-                            await _auth.signUpUsingEmail(email, password);
+                            await _auth.signUpUsingEmail(email, password, true);
 
                         if (result == null) {
                           setState(() {

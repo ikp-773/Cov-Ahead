@@ -194,11 +194,12 @@ class _SignInMerchantState extends State<SignInMerchant> {
                         setState(() {});
                         dynamic result =
                             await _auth.signInUsingMail(email, password);
-                        Get.off(HomeCustomer());
                         if (result == null) {
                           setState(() {
                             error = 'Could not Sign In with the Credentials';
                           });
+                        } else {
+                          Get.off(MerchantDashboard());
                         }
                       }
                     },
