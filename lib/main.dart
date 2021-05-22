@@ -1,10 +1,10 @@
 import 'package:covid_qrcode_bfh/models/user.dart';
+import 'package:covid_qrcode_bfh/screens/splash_screen.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'screens/welcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,9 +23,10 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.purple,
+          fontFamily: 'SourceSansPro',
         ),
-        home: Welcome(),
+        home: SplashScreen(),
       ),
     );
   }

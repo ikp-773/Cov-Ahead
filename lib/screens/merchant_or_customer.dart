@@ -10,10 +10,11 @@ class MerchantOrCustomer extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            image: const DecorationImage(
-                image: NetworkImage(
-                    'https://c4.wallpaperflare.com/wallpaper/683/498/374/blurred-colorful-vertical-portrait-display-wallpaper-preview.jpg'),
-                fit: BoxFit.fill)),
+          image: const DecorationImage(
+            image: AssetImage('assets/images/background.jpeg'),
+            fit: BoxFit.cover,
+          ),
+        ),
         width: Get.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,17 +26,12 @@ class MerchantOrCustomer extends StatelessWidget {
             Text(
               'Welcome ',
               style: TextStyle(
-                  fontFamily: 'SourceSansPro',
-                  fontSize: 32,
-                  color: Colors.purple),
-            ),
-            SizedBox(
-              height: 200.0,
-              width: 150.0,
-              child: Divider(
-                color: Colors.teal.shade100,
+                fontFamily: 'ChelaOne',
+                fontSize: 45,
+                color: Color(0xffc675e6),
               ),
             ),
+            SizedBox(height: 120),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: ElevatedButton(
@@ -43,8 +39,8 @@ class MerchantOrCustomer extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                         if (states.contains(MaterialState.pressed))
-                          return Colors.purple.shade400;
-                        return Colors.purple.shade700;
+                          return Colors.purple.shade300;
+                        return Colors.purple.shade600;
                       },
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -80,8 +76,8 @@ class MerchantOrCustomer extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                         if (states.contains(MaterialState.pressed))
-                          return Colors.purple.shade400;
-                        return Colors.purple.shade700;
+                          return Colors.purple.shade300;
+                        return Colors.purple.shade600;
                       },
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

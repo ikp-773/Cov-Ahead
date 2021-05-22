@@ -21,9 +21,9 @@ class _SignInCustomerState extends State<SignInCustomer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xfffcf5ff),
       bottomNavigationBar: SizedBox(
-        height: 130,
+        height: 100,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -35,7 +35,7 @@ class _SignInCustomerState extends State<SignInCustomer> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 20),
             GestureDetector(
               onTap: () async {
                 dynamic result = await _auth.signInUsingGoogle();
@@ -44,13 +44,13 @@ class _SignInCustomerState extends State<SignInCustomer> {
                     error = 'Could not Sign In with Google';
                   });
                 } else {
-                  Get.to(HomeCustomer());
+                  Get.off(HomeCustomer());
                 }
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 23),
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: Colors.purple[700],
                   borderRadius: BorderRadius.circular(5),
                 ),
                 height: 50,
@@ -67,18 +67,18 @@ class _SignInCustomerState extends State<SignInCustomer> {
                     Container(
                       width: .5,
                       height: 60,
-                      margin: EdgeInsets.fromLTRB(0, 10, 35, 10),
-                      color: Color(0x40ffffff),
+                      margin: EdgeInsets.fromLTRB(0, 10, 15, 10),
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                       child: Text(
                         'Continue with Google',
                         style: TextStyle(
-                          color: Color(0xffffffff),
-                          fontSize: 16,
-                        ),
-                        textAlign: TextAlign.center,
+                            color: Color(0xffffffff),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.left,
                       ),
                     ),
                   ],
@@ -105,17 +105,18 @@ class _SignInCustomerState extends State<SignInCustomer> {
                 padding: const EdgeInsets.all(22.0),
                 child: Icon(
                   Icons.close_rounded,
-                  color: Color(0xff151522),
+                  color: Colors.purple,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(25, 20, 25, 14.5),
+              padding: const EdgeInsets.fromLTRB(25, 50, 25, 14.5),
               child: Text(
                 'Welcome Back',
                 style: TextStyle(
+                  fontFamily: 'ChelaOne',
                   color: Colors.black,
-                  fontSize: 28,
+                  fontSize: 35,
                 ),
               ),
             ),
@@ -129,7 +130,7 @@ class _SignInCustomerState extends State<SignInCustomer> {
                     child: Text(
                       'Email Address',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.purple[800],
                         fontSize: 15,
                       ),
                       textAlign: TextAlign.left,
@@ -142,7 +143,8 @@ class _SignInCustomerState extends State<SignInCustomer> {
                         color: Colors.black,
                         fontSize: 13,
                       ),
-                      decoration: textFieldDecoration,
+                      decoration:
+                          textFieldDecoration.copyWith(hintText: 'Email'),
                       validator: (value) =>
                           value.isEmpty ? 'Enter a valid email' : null,
                       onChanged: (value) {
@@ -157,7 +159,7 @@ class _SignInCustomerState extends State<SignInCustomer> {
                     child: Text(
                       'Password',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.purple[800],
                         fontSize: 15,
                       ),
                       textAlign: TextAlign.left,
@@ -203,7 +205,7 @@ class _SignInCustomerState extends State<SignInCustomer> {
                       padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                       margin: EdgeInsets.fromLTRB(23, 0, 23, 24),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Colors.purple[400],
                         borderRadius: BorderRadius.circular(5),
                       ),
                       height: 50,
@@ -212,33 +214,12 @@ class _SignInCustomerState extends State<SignInCustomer> {
                         'Login',
                         style: TextStyle(
                           color: Color(0xffffffff),
+                          fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Forget Password? ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          'Reset here ',
-                          style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                   SizedBox(height: 10),
                   Text(

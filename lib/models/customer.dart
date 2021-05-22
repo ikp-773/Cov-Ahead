@@ -6,9 +6,11 @@ class CustomerData {
   final String address;
   final String pinCode;
   final int vaccineStatus; //0-Not Vaccinated 1-Partial, 2- Fully,
+  final bool covidStatas;
   CustomerData(
       {this.uid,
       this.vaccineStatus,
+      this.covidStatas,
       this.name,
       this.address,
       this.mail,
@@ -23,6 +25,7 @@ class CustomerDataModel {
   final String address;
   final String pinCode;
   final int vaccineStatus; //0-Not Vaccinated 1-Partial, 2- Fully,
+  final bool covidStatas;
 
   CustomerDataModel({
     this.address,
@@ -31,6 +34,7 @@ class CustomerDataModel {
     this.phoneNum,
     this.pinCode,
     this.vaccineStatus,
+    this.covidStatas,
   });
 }
 

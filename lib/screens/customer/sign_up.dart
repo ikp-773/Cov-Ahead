@@ -27,7 +27,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xfffcf5ff),
       bottomNavigationBar: SizedBox(
         height: 90,
         child: Column(
@@ -49,7 +49,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 23),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.purple[700],
                   borderRadius: BorderRadius.circular(5),
                 ),
                 height: 50,
@@ -66,18 +66,19 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                     Container(
                       width: .5,
                       height: 60,
-                      margin: EdgeInsets.fromLTRB(0, 10, 35, 10),
-                      color: Color(0x40ffffff),
+                      margin: EdgeInsets.fromLTRB(0, 10, 15, 10),
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                       child: Text(
                         'Continue with Google',
                         style: TextStyle(
+                          fontWeight: FontWeight.w600,
                           color: Color(0xffffffff),
                           fontSize: 16,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                       ),
                     ),
                   ],
@@ -102,7 +103,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                   child: Text(
                     'log in ',
                     style: TextStyle(
-                      color: Colors.blue[800],
+                      color: Colors.purple[800],
                       fontSize: 15,
                     ),
                   ),
@@ -117,12 +118,13 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 150),
             Text(
               'Create an account',
               style: TextStyle(
+                fontFamily: 'ChelaOne',
                 color: Colors.black,
-                fontSize: 28,
+                fontSize: 38,
               ),
               textAlign: TextAlign.center,
             ),
@@ -135,10 +137,10 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                     padding: EdgeInsets.fromLTRB(25, 44, 25, 19),
                     child: TextFormField(
                         style: TextStyle(
-                          color: Colors.black,
                           fontSize: 13,
                         ),
-                        decoration: textFieldDecoration,
+                        decoration:
+                            textFieldDecoration.copyWith(labelText: 'Email'),
                         validator: (value) =>
                             value.isEmpty ? 'Enter a valid email' : null,
                         onChanged: (value) {
@@ -156,7 +158,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                         fontSize: 13,
                       ),
                       decoration:
-                          textFieldDecoration.copyWith(hintText: 'Password'),
+                          textFieldDecoration.copyWith(labelText: 'Password'),
                       validator: (value) =>
                           value.length < 6 ? 'Minimum 6 characters' : null,
                       obscureText: true,
@@ -178,7 +180,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                         fontSize: 13,
                       ),
                       decoration: textFieldDecoration.copyWith(
-                          hintText: 'Confirm Password'),
+                          labelText: 'Confirm Password'),
                       validator: (value) =>
                           value != password ? 'Passwords doesn\'t match' : null,
                       obscureText: true,
@@ -210,16 +212,17 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                         padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                         margin: EdgeInsets.symmetric(horizontal: 23),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Colors.purple[500],
                           borderRadius: BorderRadius.circular(5),
                         ),
                         height: 50,
                         width: 600,
                         child: Text(
-                          'Get started',
+                          'Get Started',
                           style: TextStyle(
                             color: Color(0xffffffff),
                             fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
                         ),
