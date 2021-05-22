@@ -2,6 +2,7 @@ import 'package:covid_qrcode_bfh/models/user.dart';
 import 'package:covid_qrcode_bfh/screens/authentication/sign_in.dart';
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
+import 'package:covid_qrcode_bfh/screens/merchant/details.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,9 +46,9 @@ class _SignUpState extends State<SignUp> {
                     error = 'Could not sign you in using google.';
                   });
                 } else if (widget.isCustomer) {
-                  Get.off(DetailsCustomer());
+                  Get.offAll(() => DetailsCustomer());
                 } else {
-                  Get.off(MerchantDashboard());
+                  Get.offAll(() => DetailsMerchant());
                 }
               },
               child: Container(

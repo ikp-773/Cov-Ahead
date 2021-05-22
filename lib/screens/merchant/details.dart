@@ -15,7 +15,6 @@ class DetailsMerchant extends StatefulWidget {
 
 class _DetailsMerchantState extends State<DetailsMerchant> {
   final _formKey = GlobalKey<FormState>();
-  // final AuthServices _auth = AuthServices();
 
   String merchantName = '';
   String shopName = '';
@@ -33,8 +32,9 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
-          child: Consumer<UserModel>(builder: (context, merchant, child) {
-            return StreamBuilder<MerchantData>(
+          child: Consumer<UserModel>(
+            builder: (context, merchant, child) {
+              return StreamBuilder<MerchantData>(
                 stream: MerchDatabaseService(uid: merchant?.uid).merchantData,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
@@ -52,11 +52,7 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                 validator: (value) => value.isEmpty
                                     ? 'Field Cannot be Blank '
                                     : null,
-                                // onFieldSubmitted: (value) {
-                                //   setState(() {
-                                //     merchantName = value;
-                                //   });
-                                // },
+
                                 onChanged: (value) {
                                   setState(() {
                                     merchantName = value;
@@ -166,8 +162,10 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                     print("No Data Available");
                     return Center(child: CircularProgressIndicator());
                   }
-                });
-          }),
+                },
+              );
+            },
+          ),
         ),
       ),
     );

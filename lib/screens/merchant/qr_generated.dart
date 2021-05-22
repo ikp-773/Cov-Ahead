@@ -18,7 +18,7 @@ class GeneratedQR extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.offAll(() => MerchantDashboard());
+                  Get.off(() => MerchantDashboard());
                 },
                 child: Container(
                   padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
@@ -39,10 +39,10 @@ class GeneratedQR extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                'You can view this QR code in your settings',
-                style: TextStyle(fontWeight: FontWeight.w100),
-              )
+              // Text(
+              //   'Take a printout and keep it posted at your shop entry',
+              //   style: TextStyle(fontWeight: FontWeight.w100),
+              // )
             ],
           ),
         ),
@@ -81,7 +81,7 @@ class GeneratedQR extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                 child: Text(
-                    'PDF copy of this QR code is sent to your mail. Take a printout and keep it posted at your shop entry'),
+                    'Take a printout and keep it posted at your shop entry'),
               ),
               // Text('Take a printout and keep it posted at your shop entry'),
             ],
