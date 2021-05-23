@@ -1,5 +1,5 @@
 import 'package:covid_qrcode_bfh/models/user.dart';
-import 'package:covid_qrcode_bfh/screens/customer/home.dart';
+import 'package:covid_qrcode_bfh/screens/customer/qr_scan.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
 import 'package:covid_qrcode_bfh/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -206,9 +206,9 @@ class _SignInState extends State<SignIn> {
                             error = 'Could not Sign In with the Credentials';
                           });
                         } else if (widget.isCustomer) {
-                          Get.offAll(()=>HomeCustomer());
+                          Get.offAll(() => HomeCustomer());
                         } else {
-                          Get.offAll(()=>MerchantDashboard());
+                          Get.offAll(() => MerchantDashboard());
                         }
                       }
                     },

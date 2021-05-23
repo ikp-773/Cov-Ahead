@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'home.dart';
+import 'qr_scan.dart';
 
 class DetailsCustomer extends StatefulWidget {
   DetailsCustomer({Key key}) : super(key: key);
@@ -30,7 +30,12 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Customer Sign In"),
+        title: Text(
+          "Profile Details",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -29,7 +29,12 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: Text('Dashboard'),
+              title: Text(
+                'Customers',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               actions: [
                 IconButton(
                     icon: Icon(Icons.settings_rounded),
@@ -88,6 +93,7 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                   // print('Inside builder: ' + snapshot.data.toString());
                   return Center(
                     child: ListView.builder(
+                      padding: EdgeInsets.only(top: 30),
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return snapshot.data != null
@@ -118,8 +124,7 @@ class CustomerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     String date = snapshot.timestamp.toString().substring(0, 10);
     String time = snapshot.timestamp.toString().substring(11, 23);
-    print(time + '+++++++++++++++++++++++++++++++++++++++++++++');
-    int hour24 = int.parse(time.substring(0, 1));
+    int hour24 = int.parse(time.substring(0, 2));
     int hour12 = hour24 < 13 ? hour24 : hour24 - 12;
     String ampm = hour24 < 12 ? 'AM' : 'PM';
     return Container(
@@ -188,7 +193,7 @@ class CustomerTile extends StatelessWidget {
             child: Text(
               '${date.substring(8, 10)}-${date.substring(5, 7)}-${date.substring(0, 4)}',
               style: TextStyle(
-                color: Colors.black38,
+                color: Colors.black54,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -196,9 +201,9 @@ class CustomerTile extends StatelessWidget {
           ),
           Positioned(
             left: 90,
-            bottom: 10,
+            bottom: 15,
             child: Text(
-              '$hour12 : ${time.substring(3, 4)} $ampm',
+              '$hour12 : ${time.substring(3, 5)} $ampm',
               style: TextStyle(
                 color: Colors.black38,
                 fontSize: 14,

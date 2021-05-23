@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'customer/home.dart';
+import 'customer/qr_scan.dart';
 import 'merchant/dashboard.dart';
 import 'merchant_or_customer.dart';
 

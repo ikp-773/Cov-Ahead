@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:covid_qrcode_bfh/models/user.dart';
-import 'package:covid_qrcode_bfh/screens/customer/check_QR_code.dart';
+import 'package:covid_qrcode_bfh/screens/customer/check_qr_code.dart';
 import 'package:covid_qrcode_bfh/screens/customer/dashboard.dart';
 import 'package:covid_qrcode_bfh/screens/customer/details.dart';
 import 'package:covid_qrcode_bfh/screens/merchant_or_customer.dart';
@@ -50,7 +50,12 @@ class _HomeCustomerState extends State<HomeCustomer> {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            Text('Customer Home'),
+            Text(
+              'CovAhead',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             Spacer(),
             GestureDetector(
               onTap: () {
@@ -81,19 +86,38 @@ class _HomeCustomerState extends State<HomeCustomer> {
           Expanded(
             child: Center(
               child: Text(
-                'Align the QR Code in TextBox',
+                'Align the QR Code',
               ),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               Get.to(DashboardCustomer());
             },
-            child: Text(
-              'Shops Visited',
-              style: TextStyle(color: Colors.white),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              decoration: BoxDecoration(
+                  color: Colors.purple,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x24000000),
+                      offset: Offset(5, 8),
+                      blurRadius: 28,
+                      spreadRadius: 2,
+                    ),
+                  ]),
+              child: Text(
+                'Shops Visited',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
+              ),
             ),
           ),
+          SizedBox(height: 20),
         ],
       ),
     );
@@ -111,7 +135,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
-        borderColor: Colors.red,
+        borderColor: Colors.purple,
         borderRadius: 10,
         borderLength: 30,
         borderWidth: 10,
@@ -133,15 +157,11 @@ class _HomeCustomerState extends State<HomeCustomer> {
             '\n-------------\n\nBarcode Type: ${describeEnum(result.format)}   Data: ${result.code}');
         if (result.code != null) {
           controller.dispose();
-          // Get.off(SuccessQR());
+
           Get.off(CheckQR(
             code: result.code,
             customerUID: user.uid,
           ));
-          // await DatabaseService(uid: user.uid).updateVistedAreas(
-          //   storeName: result.code,
-          //   dateTime: DateTime.now(),
-          // );
         }
       },
     );
