@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InputDecoration textFieldDecoration = InputDecoration(
+InputDecoration detailsDecoration = InputDecoration(
   contentPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
   labelStyle: TextStyle(
     fontSize: 16,
@@ -16,12 +16,3 @@ InputDecoration textFieldDecoration = InputDecoration(
       OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
 );
 
-TextStyle labelS = TextStyle(
-  fontWeight: FontWeight.w600,
-  fontSize: 14,
-);
-
-TextStyle unSelectedLabelS = TextStyle(
-  fontWeight: FontWeight.w400,
-  fontSize: 14,
-);

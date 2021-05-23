@@ -1,5 +1,6 @@
 import 'package:covid_qrcode_bfh/models/customer.dart';
 import 'package:covid_qrcode_bfh/models/user.dart';
+import 'package:covid_qrcode_bfh/screens/customer/constants.dart';
 import 'package:covid_qrcode_bfh/services/customer_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,8 +52,8 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                               children: [
                                 TextFormField(
                                   initialValue: customerData.name,
-                                  decoration:
-                                      InputDecoration(labelText: 'Name'),
+                                  decoration: detailsDecoration.copyWith(
+                                      labelText: 'Name'),
                                   validator: (value) => value.isEmpty
                                       ? 'Field Cannot be Blank '
                                       : null,
@@ -65,8 +66,8 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                 TextFormField(
                                   initialValue: customerData.mail,
                                   readOnly: true,
-                                  decoration:
-                                      InputDecoration(labelText: 'Mail ID'),
+                                  decoration: detailsDecoration.copyWith(
+                                      labelText: 'Mail ID'),
                                   onChanged: (value) {
                                     setState(() {
                                       email = value;
@@ -76,7 +77,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                 TextFormField(
                                   initialValue: customerData.phoneNum ?? '',
                                   keyboardType: TextInputType.phone,
-                                  decoration: InputDecoration(
+                                  decoration: detailsDecoration.copyWith(
                                       labelText: 'Phone Number'),
                                   validator: (value) => value.isEmpty
                                       ? 'Enter your Number '
@@ -91,8 +92,8 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                   initialValue: customerData.address ?? '',
                                   minLines: 3,
                                   maxLines: 3,
-                                  decoration:
-                                      InputDecoration(labelText: 'Address'),
+                                  decoration: detailsDecoration.copyWith(
+                                      labelText: 'Address'),
                                   validator: (value) => value.isEmpty
                                       ? 'Enter your Address/Locality'
                                       : null,
@@ -105,8 +106,8 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                 TextFormField(
                                   initialValue: customerData.pinCode ?? '',
                                   keyboardType: TextInputType.number,
-                                  decoration:
-                                      InputDecoration(labelText: 'Pin Code'),
+                                  decoration: detailsDecoration.copyWith(
+                                      labelText: 'Pin Code'),
                                   validator: (value) => value.length != 6
                                       ? 'Enter your proper pincode '
                                       : null,
@@ -118,7 +119,9 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                 ),
 
                                 // Vaccine status dropdown, needs improvement
-                                DropdownButton(
+                                DropdownButtonFormField(
+                                  decoration: detailsDecoration.copyWith(
+                                      labelText: 'Vacination Status'),
                                   value:
                                       vaccineStat ?? customerData.vaccineStatus,
                                   onChanged: (val) {

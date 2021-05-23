@@ -15,13 +15,3 @@ InputDecoration textFieldDecoration = InputDecoration(
   border:
       OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
 );
-
-TextStyle labelS = TextStyle(
-  fontWeight: FontWeight.w600,
-  fontSize: 14,
-);
-
-TextStyle unSelectedLabelS = TextStyle(
-  fontWeight: FontWeight.w400,
-  fontSize: 14,
-);

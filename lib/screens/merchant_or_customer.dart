@@ -51,14 +51,16 @@ class MerchantOrCustomer extends StatelessWidget {
                   SharedPreferences _sharedPref =
                       await SharedPreferences.getInstance();
                   _sharedPref.setBool('isCustomer', false);
-                  Get.to(() => SignUp(isCustomer: false,));
+                  Get.to(() => SignUp(
+                        isCustomer: false,
+                      ));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
                     'Continue as Merchant',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 20,
                       fontFamily: 'SourceSansPro',
                     ),
                   ),
@@ -88,14 +90,16 @@ class MerchantOrCustomer extends StatelessWidget {
                   SharedPreferences _sharedPref =
                       await SharedPreferences.getInstance();
                   _sharedPref.setBool('isCustomer', true);
-                  Get.to(() => SignUp(isCustomer: true,));
+                  Get.to(() => SignUp(
+                        isCustomer: true,
+                      ));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
                     'Continue as Customer',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 20,
                       fontFamily: 'SourceSansPro',
                     ),
                   ),
@@ -108,4 +112,3 @@ class MerchantOrCustomer extends StatelessWidget {
     );
   }
 }
-//https://wallpaperaccess.com/full/885189.png

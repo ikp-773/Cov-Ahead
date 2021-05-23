@@ -1,5 +1,6 @@
 import 'package:covid_qrcode_bfh/models/merchant.dart';
 import 'package:covid_qrcode_bfh/models/user.dart';
+import 'package:covid_qrcode_bfh/screens/customer/constants.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
 import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:flutter/material.dart';
@@ -47,12 +48,11 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                             children: [
                               TextFormField(
                                 initialValue: merchantData.merchantName,
-                                decoration:
-                                    InputDecoration(labelText: 'Merchant Name'),
+                                decoration: detailsDecoration.copyWith(
+                                    labelText: 'Merchant Name'),
                                 validator: (value) => value.isEmpty
                                     ? 'Field Cannot be Blank '
                                     : null,
-
                                 onChanged: (value) {
                                   setState(() {
                                     merchantName = value;
@@ -61,8 +61,8 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                               ),
                               TextFormField(
                                 initialValue: merchantData.shopName ?? '',
-                                decoration:
-                                    InputDecoration(labelText: 'Shop Name'),
+                                decoration: detailsDecoration.copyWith(
+                                    labelText: 'Shop Name'),
                                 validator: (value) => value.isEmpty
                                     ? 'Field Cannot be Blank '
                                     : null,
@@ -76,14 +76,14 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                 initialValue: merchantData.mail,
                                 readOnly: true,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration:
-                                    InputDecoration(labelText: 'Mail ID'),
+                                decoration: detailsDecoration.copyWith(
+                                    labelText: 'Mail ID'),
                               ),
                               TextFormField(
                                 initialValue: merchantData.phoneNum ?? '',
                                 keyboardType: TextInputType.phone,
-                                decoration:
-                                    InputDecoration(labelText: 'Phone Number'),
+                                decoration: detailsDecoration.copyWith(
+                                    labelText: 'Phone Number'),
                                 validator: (value) =>
                                     value.isEmpty ? 'Enter your Number ' : null,
                                 onChanged: (value) {
@@ -104,14 +104,14 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                     address = value;
                                   });
                                 },
-                                decoration:
-                                    InputDecoration(labelText: 'Shop Address'),
+                                decoration: detailsDecoration.copyWith(
+                                    labelText: 'Shop Address'),
                               ),
                               TextFormField(
                                 initialValue: merchantData.pinCode ?? '',
                                 keyboardType: TextInputType.number,
-                                decoration:
-                                    InputDecoration(labelText: 'Pincode'),
+                                decoration: detailsDecoration.copyWith(
+                                    labelText: 'Pincode'),
                                 validator: (value) => value.isEmpty
                                     ? 'Enter your proper pincode'
                                     : null,
