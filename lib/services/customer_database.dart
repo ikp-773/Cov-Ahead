@@ -57,9 +57,9 @@ class DatabaseService {
   }
 
 // Fetch customer name for adding to merchant db
-  Future<String> getCustomerName() async {
+  Future<Map> getCustomerName() async {
     DocumentSnapshot<Map<String, dynamic>> _doc = await customer.doc(uid).get();
-    return _doc.data()['name'];
+    return _doc.data();
   }
 
   List<CustomerDataModel> _customerListFromSnapshot(
@@ -102,6 +102,7 @@ class DatabaseService {
     return customer
         .doc(uid)
         .collection('places_visited')
+        .orderBy('timestamp', descending: true)
         .snapshots()
         .map(_placesVisited);
   }

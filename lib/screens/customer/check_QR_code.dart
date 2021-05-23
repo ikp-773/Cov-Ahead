@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:covid_qrcode_bfh/screens/customer/dashboard.dart';
-import 'package:covid_qrcode_bfh/screens/customer/home.dart';
+import 'package:covid_qrcode_bfh/screens/customer/qr_scan.dart';
 import 'package:covid_qrcode_bfh/services/merchant_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

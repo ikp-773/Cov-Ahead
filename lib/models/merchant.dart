@@ -35,6 +35,9 @@ class MerchantDataModel {
 class MerchantVisitorLog {
   final String customerName;
   final DateTime timestamp;
+  final String mail;
+  final String phoneNum;
 
-  MerchantVisitorLog({this.customerName, this.timestamp});
+  MerchantVisitorLog(
+      {this.customerName, this.timestamp, this.mail, this.phoneNum});
 }

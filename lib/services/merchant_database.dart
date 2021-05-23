@@ -57,8 +57,6 @@ class MerchDatabaseService {
     }).toList();
   }
 
-  
-
   MerchantData _merchantDataFromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return MerchantData(
@@ -85,6 +83,7 @@ class MerchDatabaseService {
     return merchant
         .doc(uid)
         .collection('visitorsLog')
+        .orderBy('timestamp', descending: true)
         .snapshots()
         .map(_visitorsLogGeneration);
   }
@@ -107,8 +106,13 @@ class MerchDatabaseService {
         );
 
         // Fetching customer name to add in merchant visitor log
-        String customerName = await _customerDb.getCustomerName();
-        addCustomerVisit(customerName: customerName, timestamp: _currentTime);
+        var customerData = await _customerDb.getCustomerName();
+        addCustomerVisit(
+          customerName: customerData['name'],
+          timestamp: _currentTime,
+          // mail: customerData['mail'],
+          // phone: customerData['phoneNum'],
+        );
       }
     });
     return returnVal;
@@ -116,12 +120,16 @@ class MerchDatabaseService {
 
   // Adding customer visit to visitorsLog in merchant collection
   Future<bool> addCustomerVisit(
-      {String customerName, DateTime timestamp}) async {
-    await merchant
-        .doc(uid)
-        .collection('visitorsLog')
-        .doc()
-        .set({'customerName': customerName, 'timestamp': timestamp});
+      {String customerName,
+      DateTime timestamp,
+      String mail,
+      String phone}) async {
+    await merchant.doc(uid).collection('visitorsLog').doc().set({
+      'customerName': customerName,
+      'timestamp': timestamp,
+      // 'mail': mail,
+      // 'phoneNum': phone,
+    });
     return true;
   }
 
