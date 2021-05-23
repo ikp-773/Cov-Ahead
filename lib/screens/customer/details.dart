@@ -50,10 +50,16 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
+                                SizedBox(height: 12),
+                                Text(
+                                  'Name',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(height: 2),
                                 TextFormField(
                                   initialValue: customerData.name,
                                   decoration: detailsDecoration.copyWith(
-                                      labelText: 'Name'),
+                                      hintText: 'Name'),
                                   validator: (value) => value.isEmpty
                                       ? 'Field Cannot be Blank '
                                       : null,
@@ -63,25 +69,34 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
-                                SizedBox(height: 15),
+                                SizedBox(height: 12),
+                                Text(
+                                  'Mail ID',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(height: 2),
                                 TextFormField(
                                   initialValue: customerData.mail,
                                   readOnly: true,
                                   decoration: detailsDecoration.copyWith(
-                                      labelText: 'Mail ID'),
+                                      hintText: 'Mail ID'),
                                   onChanged: (value) {
                                     setState(() {
                                       email = value;
                                     });
                                   },
                                 ),
-                                SizedBox(height: 15),
-
+                                SizedBox(height: 12),
+                                Text(
+                                  'Phone Number',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(height: 2),
                                 TextFormField(
                                   initialValue: customerData.phoneNum ?? '',
                                   keyboardType: TextInputType.phone,
                                   decoration: detailsDecoration.copyWith(
-                                      labelText: 'Phone Number'),
+                                      hintText: 'Phone Number'),
                                   validator: (value) => value.isEmpty
                                       ? 'Enter your Number '
                                       : null,
@@ -91,14 +106,18 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
-                                SizedBox(height: 15),
-
+                                SizedBox(height: 12),
+                                Text(
+                                  'Address',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(height: 2),
                                 TextFormField(
                                   initialValue: customerData.address ?? '',
                                   minLines: 3,
                                   maxLines: 3,
                                   decoration: detailsDecoration.copyWith(
-                                      labelText: 'Address'),
+                                      hintText: 'Address'),
                                   validator: (value) => value.isEmpty
                                       ? 'Enter your Address/Locality'
                                       : null,
@@ -108,13 +127,17 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
-                                SizedBox(height: 15),
-
+                                SizedBox(height: 12),
+                                Text(
+                                  'Pincode',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(height: 2),
                                 TextFormField(
                                   initialValue: customerData.pinCode ?? '',
                                   keyboardType: TextInputType.number,
                                   decoration: detailsDecoration.copyWith(
-                                      labelText: 'Pin Code'),
+                                      hintText: 'Pin Code'),
                                   validator: (value) => value.length != 6
                                       ? 'Enter your proper pincode '
                                       : null,
@@ -124,12 +147,16 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
-                                SizedBox(height: 15),
-
+                                SizedBox(height: 12),
+                                Text(
+                                  'Vacination Status',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(height: 2),
                                 // Vaccine status dropdown, needs improvement
                                 DropdownButtonFormField(
                                   decoration: detailsDecoration.copyWith(
-                                      labelText: 'Vacination Status'),
+                                      hintText: 'Vacination Status'),
                                   value:
                                       vaccineStat ?? customerData.vaccineStatus,
                                   onChanged: (val) {
@@ -185,8 +212,9 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                   child: Text(
                                     'Save',
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                               ],

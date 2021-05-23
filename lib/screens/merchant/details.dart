@@ -45,11 +45,18 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                         Form(
                           key: _formKey,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              SizedBox(height: 12),
+                              Text(
+                                'Name',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 2),
                               TextFormField(
                                 initialValue: merchantData.merchantName,
                                 decoration: detailsDecoration.copyWith(
-                                    labelText: 'Merchant Name'),
+                                    hintText: 'Your Name'),
                                 validator: (value) => value.isEmpty
                                     ? 'Field Cannot be Blank '
                                     : null,
@@ -59,6 +66,12 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                   });
                                 },
                               ),
+                              SizedBox(height: 12),
+                              Text(
+                                'Shop Name',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 2),
                               TextFormField(
                                 initialValue: merchantData.shopName ?? '',
                                 decoration: detailsDecoration.copyWith(
@@ -72,13 +85,24 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                   });
                                 },
                               ),
+                              SizedBox(height: 12),
+                              Text(
+                                'Mail ID',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 2),
                               TextFormField(
                                 initialValue: merchantData.mail,
                                 readOnly: true,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: detailsDecoration.copyWith(
-                                    labelText: 'Mail ID'),
+                                decoration: detailsDecoration,
                               ),
+                              SizedBox(height: 12),
+                              Text(
+                                'Phone Number',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 2),
                               TextFormField(
                                 initialValue: merchantData.phoneNum ?? '',
                                 keyboardType: TextInputType.phone,
@@ -92,6 +116,12 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                   });
                                 },
                               ),
+                              SizedBox(height: 12),
+                              Text(
+                                'Shop Address',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 2),
                               TextFormField(
                                 initialValue: merchantData.address ?? '',
                                 minLines: 3,
@@ -105,8 +135,14 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                   });
                                 },
                                 decoration: detailsDecoration.copyWith(
-                                    labelText: 'Shop Address'),
+                                    hintText: 'Location of your shop'),
                               ),
+                              SizedBox(height: 12),
+                              Text(
+                                'Pincode',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 2),
                               TextFormField(
                                 initialValue: merchantData.pinCode ?? '',
                                 keyboardType: TextInputType.number,
@@ -121,8 +157,12 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                   });
                                 },
                               ),
-                              SizedBox(height: 20),
+                              SizedBox(height: 50),
                               ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                  elevation: 5,
+                                ),
                                 onPressed: () async {
                                   if (_formKey.currentState.validate()) {
                                     await MerchDatabaseService(
@@ -150,7 +190,10 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                 },
                                 child: Text(
                                   'Save',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                             ],

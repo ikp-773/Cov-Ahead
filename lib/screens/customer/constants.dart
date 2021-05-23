@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 InputDecoration detailsDecoration = InputDecoration(
   contentPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-  labelStyle: TextStyle(
-    fontSize: 16,
-    color: Colors.purple,
+  hintStyle: TextStyle(
+    fontSize: 13,
   ),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(color: Colors.purple, width: 1),

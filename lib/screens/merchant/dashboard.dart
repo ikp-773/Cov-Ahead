@@ -28,7 +28,8 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
         else {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Merchant Dashboard'),
+              automaticallyImplyLeading: false,
+              title: Text('Dashboard'),
               actions: [
                 IconButton(
                     icon: Icon(Icons.settings_rounded),
@@ -51,6 +52,7 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                     }),
                 IconButton(
                     icon: Icon(Icons.power_settings_new_rounded),
+                    tooltip: 'LogOut',
                     onPressed: () {
                       _auth.signOut();
 
@@ -83,16 +85,16 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                       ),
                     );
                   }
-                  print('Inside builder: ' + snapshot.data.toString());
+                  // print('Inside builder: ' + snapshot.data.toString());
                   return Center(
                     child: ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(snapshot.data[index].customerName),
-                          leading:
-                              Text(snapshot.data[index].timestamp.toString()),
-                        );
+                        return snapshot.data != null
+                            ? CustomerTile(
+                                snapshot: snapshot.data[index],
+                              )
+                            : Container();
                       },
                     ),
                   );
@@ -105,5 +107,112 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
         }
       },
     );
+  }
+}
+
+class CustomerTile extends StatelessWidget {
+  final snapshot;
+  const CustomerTile({@required this.snapshot});
+
+  @override
+  Widget build(BuildContext context) {
+    String date = snapshot.timestamp.toString().substring(0, 10);
+    String time = snapshot.timestamp.toString().substring(11, 23);
+    print(time + '+++++++++++++++++++++++++++++++++++++++++++++');
+    int hour24 = int.parse(time.substring(0, 1));
+    int hour12 = hour24 < 13 ? hour24 : hour24 - 12;
+    String ampm = hour24 < 12 ? 'AM' : 'PM';
+    return Container(
+      margin: EdgeInsets.fromLTRB(18, 10, 18, 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xfffcf5ff),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x24000000),
+            offset: Offset(0, 8),
+            blurRadius: 28,
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      height: 90,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 20,
+            bottom: 20,
+            left: 20,
+            child: Container(
+              height: 50,
+              width: 50,
+              padding: EdgeInsets.only(bottom: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.purple[200],
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0x54000000),
+                    blurRadius: 3,
+                    spreadRadius: 0,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  snapshot.customerName[0],
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 15,
+            left: 90,
+            child: Text(
+              snapshot.customerName,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 90,
+            top: 40,
+            child: Text(
+              '${date.substring(8, 10)}-${date.substring(5, 7)}-${date.substring(0, 4)}',
+              style: TextStyle(
+                color: Colors.black38,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 90,
+            bottom: 10,
+            child: Text(
+              '$hour12 : ${time.substring(3, 4)} $ampm',
+              style: TextStyle(
+                color: Colors.black38,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    // ListTile(
+    //   title: Text(snapshot.customerName),
+    //   leading: Text(snapshot.timestamp.toString()),
+    // );
   }
 }
