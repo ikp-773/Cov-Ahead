@@ -63,6 +63,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
+                                SizedBox(height: 15),
                                 TextFormField(
                                   initialValue: customerData.mail,
                                   readOnly: true,
@@ -74,6 +75,8 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
+                                SizedBox(height: 15),
+
                                 TextFormField(
                                   initialValue: customerData.phoneNum ?? '',
                                   keyboardType: TextInputType.phone,
@@ -88,6 +91,8 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
+                                SizedBox(height: 15),
+
                                 TextFormField(
                                   initialValue: customerData.address ?? '',
                                   minLines: 3,
@@ -103,6 +108,8 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
+                                SizedBox(height: 15),
+
                                 TextFormField(
                                   initialValue: customerData.pinCode ?? '',
                                   keyboardType: TextInputType.number,
@@ -117,6 +124,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     });
                                   },
                                 ),
+                                SizedBox(height: 15),
 
                                 // Vaccine status dropdown, needs improvement
                                 DropdownButtonFormField(
@@ -144,8 +152,13 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     ),
                                   ],
                                 ),
-
+                                SizedBox(height: 50),
                                 ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding:
+                                        EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                    elevation: 5,
+                                  ),
                                   onPressed: () async {
                                     if (_formKey.currentState.validate()) {
                                       await DatabaseService(uid: customer.uid)
@@ -171,7 +184,9 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                   },
                                   child: Text(
                                     'Save',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ],

@@ -15,4 +15,3 @@ InputDecoration detailsDecoration = InputDecoration(
   border:
       OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
 );
-
