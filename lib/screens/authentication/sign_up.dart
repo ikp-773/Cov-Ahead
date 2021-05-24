@@ -128,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                     'Log in ',
                     style: TextStyle(
                       color: Colors.purple[800],
-                      fontSize: 16,
+                      fontSize: 18,
                     ),
                   ),
                 ),
@@ -227,9 +227,9 @@ class _SignUpState extends State<SignUp> {
                             error = 'Sign up failed using email';
                           });
                         } else if (widget.isCustomer) {
-                          Get.off(DetailsCustomer());
+                          Get.offAll(DetailsCustomer());
                         } else {
-                          Get.off(MerchantDashboard());
+                          Get.offAll(MerchantDashboard());
                         }
                       }
                     },

@@ -65,9 +65,9 @@ class _SignInState extends State<SignIn> {
                       error = 'Could not Sign In with Google';
                     });
                   } else if (widget.isCustomer) {
-                    Get.off(HomeCustomer());
+                    Get.offAll(HomeCustomer());
                   } else {
-                    Get.off(MerchantDashboard());
+                    Get.offAll(MerchantDashboard());
                   }
                 } catch (e) {}
               },

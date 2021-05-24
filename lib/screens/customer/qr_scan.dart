@@ -59,7 +59,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
             Spacer(),
             GestureDetector(
               onTap: () {
-                Get.to(DetailsCustomer());
+                Get.off(DetailsCustomer());
               },
               child: Icon(
                 Icons.settings_rounded,
@@ -92,7 +92,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(DashboardCustomer());
+              Get.off(DashboardCustomer());
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
