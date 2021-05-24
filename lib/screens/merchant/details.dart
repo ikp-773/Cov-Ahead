@@ -204,7 +204,6 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                       ],
                     );
                   } else {
-                    print("No Data Available");
                     return Center(child: CircularProgressIndicator());
                   }
                 },

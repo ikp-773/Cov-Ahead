@@ -50,7 +50,6 @@ class DatabaseService {
           .collection('places_visited')
           .doc()
           .set({'storeName': storeName, 'timestamp': dateTime});
-      print('DB data updation called');
     } catch (e) {
       print('ERROR--------->\n\n$e\n\n<-------------------------->');
     }

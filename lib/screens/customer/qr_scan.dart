@@ -153,8 +153,6 @@ class _HomeCustomerState extends State<HomeCustomer> {
         setState(() {
           result = scanData;
         });
-        print(
-            '\n-------------\n\nBarcode Type: ${describeEnum(result.format)}   Data: ${result.code}');
         if (result.code != null) {
           controller.dispose();
 

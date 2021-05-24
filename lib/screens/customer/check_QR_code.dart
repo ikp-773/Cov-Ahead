@@ -31,7 +31,7 @@ class _CheckQRState extends State<CheckQR> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data) {
-                Timer(Duration(seconds: 5),
+                Timer(Duration(seconds: 4),
                     () => Get.off(() => DashboardCustomer()));
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +54,7 @@ class _CheckQRState extends State<CheckQR> {
                 );
               } else {
                 Timer(
-                    Duration(seconds: 3), () => Get.off(() => HomeCustomer()));
+                    Duration(seconds: 2), () => Get.off(() => HomeCustomer()));
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

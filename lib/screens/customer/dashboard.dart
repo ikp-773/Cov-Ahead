@@ -72,10 +72,8 @@ class _DashboardCustomerState extends State<DashboardCustomer> {
             return StreamBuilder<List<PlacesVisited>>(
               stream: DatabaseService(uid: customer.uid).placesVisited,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                print('------------>>>>' + snapshot.toString());
 
                 if (snapshot.hasData) {
-                  print('------------>>>>' + snapshot.toString());
                   return Center(
                     child: ListView.builder(
                       itemCount: snapshot.data.length,
@@ -87,7 +85,6 @@ class _DashboardCustomerState extends State<DashboardCustomer> {
                     ),
                   );
                 }
-                print('NO data');
                 return SizedBox(
                   height: Get.height,
                   child: Center(

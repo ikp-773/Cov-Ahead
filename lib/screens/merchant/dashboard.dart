@@ -89,7 +89,6 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                       ),
                     );
                   }
-                  // print('Inside builder: ' + snapshot.data.toString());
                   return Center(
                     child: ListView.builder(
                       padding: EdgeInsets.only(top: 10, bottom: 10),
@@ -104,7 +103,6 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                     ),
                   );
                 }
-                print('NO data');
                 return Center(child: CircularProgressIndicator());
               },
             ),

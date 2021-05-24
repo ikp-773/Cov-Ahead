@@ -48,7 +48,6 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           final customerData = snapshot.data;
-                          print("Data Present");
                           return Form(
                             key: _formKey,
                             child: Column(
@@ -226,7 +225,6 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                             ),
                           );
                         } else {
-                          print("No Data Available");
                           return Center(child: CircularProgressIndicator());
                         }
                       });
