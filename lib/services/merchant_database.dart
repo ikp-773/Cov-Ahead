@@ -119,11 +119,12 @@ class MerchDatabaseService {
   }
 
   // Adding customer visit to visitorsLog in merchant collection
-  Future<bool> addCustomerVisit(
-      {String customerName,
-      DateTime timestamp,
-      String mail,
-      String phone}) async {
+  Future<bool> addCustomerVisit({
+    String customerName,
+    DateTime timestamp,
+    String mail,
+    String phone,
+  }) async {
     await merchant.doc(uid).collection('visitorsLog').doc().set({
       'customerName': customerName,
       'timestamp': timestamp,
