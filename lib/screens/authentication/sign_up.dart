@@ -32,23 +32,40 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       backgroundColor: Color(0xfffcf5ff),
       bottomNavigationBar: SizedBox(
-        height: 90,
+        height: 100,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             GestureDetector(
               onTap: () async {
-                UserModel result = await _auth.signInUsingGoogle(
-                    isCustomer: widget.isCustomer);
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                          ],
+                        ),
+                      );
+                    });
+                try {
+                  UserModel result = await _auth.signInUsingGoogle(
+                      isCustomer: widget.isCustomer);
 
-                if (result == null) {
-                  setState(() {
-                    error = 'Could not sign you in using google.';
-                  });
-                } else if (widget.isCustomer) {
-                  Get.offAll(() => DetailsCustomer());
-                } else {
-                  Get.offAll(() => DetailsMerchant());
+                  if (result == null) {
+                    setState(() {
+                      error = 'Could not sign you in using google.';
+                    });
+                  } else if (widget.isCustomer) {
+                    Get.offAll(() => DetailsCustomer());
+                  } else {
+                    Get.offAll(() => DetailsMerchant());
+                  }
+                } catch (e) {
+                  print(e);
                 }
               },
               child: Container(
@@ -98,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                   'Have an account? ',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 15,
+                    fontSize: 16,
                   ),
                 ),
                 GestureDetector(
@@ -108,10 +125,10 @@ class _SignUpState extends State<SignUp> {
                     ));
                   },
                   child: Text(
-                    'log in ',
+                    'Log in ',
                     style: TextStyle(
                       color: Colors.purple[800],
-                      fontSize: 15,
+                      fontSize: 16,
                     ),
                   ),
                 ),

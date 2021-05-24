@@ -52,7 +52,7 @@ class _DashboardCustomerState extends State<DashboardCustomer> {
             GestureDetector(
               onTap: () {
                 _auth.signOut();
-                Get.off(MerchantOrCustomer());
+                Get.offAll(() => MerchantOrCustomer());
               },
               child: Icon(
                 Icons.power_settings_new_rounded,
@@ -121,9 +121,9 @@ class ShopsTile extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Color(0x24000000),
-            offset: Offset(0, 8),
-            blurRadius: 28,
-            spreadRadius: 0,
+            offset: Offset(0, 0),
+            blurRadius: 8,
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -151,7 +151,7 @@ class ShopsTile extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  snapshot.storeName[0],
+                  snapshot.storeName[0].toUpperCase(),
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,

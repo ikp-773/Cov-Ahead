@@ -39,6 +39,7 @@ class _CheckQRState extends State<CheckQR> {
                     Icon(
                       Icons.verified,
                       color: Colors.green,
+                      size: 50,
                     ),
                     SizedBox(height: 20),
 
@@ -58,9 +59,9 @@ class _CheckQRState extends State<CheckQR> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.error,
+                      Icons.new_releases,
                       color: Colors.red,
-                      size: 20,
+                      size: 50,
                     ),
                     SizedBox(height: 20),
 

@@ -70,7 +70,7 @@ class _HomeCustomerState extends State<HomeCustomer> {
             GestureDetector(
               onTap: () {
                 _auth.signOut();
-                Get.off(MerchantOrCustomer());
+                Get.offAll(() => MerchantOrCustomer());
               },
               child: Icon(
                 Icons.power_settings_new_rounded,

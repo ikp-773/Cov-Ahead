@@ -29,7 +29,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       backgroundColor: Color(0xfffcf5ff),
       bottomNavigationBar: SizedBox(
-        height: 100,
+        height: 120,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -44,17 +44,32 @@ class _SignInState extends State<SignIn> {
             SizedBox(height: 20),
             GestureDetector(
               onTap: () async {
-                UserModel result = await _auth.signInUsingGoogle(
-                    isCustomer: widget.isCustomer);
-                if (result == null) {
-                  setState(() {
-                    error = 'Could not Sign In with Google';
-                  });
-                } else if (widget.isCustomer) {
-                  Get.off(HomeCustomer());
-                } else {
-                  Get.off(MerchantDashboard());
-                }
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                          ],
+                        ),
+                      );
+                    });
+                try {
+                  UserModel result = await _auth.signInUsingGoogle(
+                      isCustomer: widget.isCustomer);
+                  if (result == null) {
+                    setState(() {
+                      error = 'Could not Sign In with Google';
+                    });
+                  } else if (widget.isCustomer) {
+                    Get.off(HomeCustomer());
+                  } else {
+                    Get.off(MerchantDashboard());
+                  }
+                } catch (e) {}
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 23),

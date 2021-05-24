@@ -1,4 +1,4 @@
-import 'package:covid_qrcode_bfh/models/merchant.dart';
+ import 'package:covid_qrcode_bfh/models/merchant.dart';
 import 'package:covid_qrcode_bfh/models/user.dart';
 import 'package:covid_qrcode_bfh/screens/customer/constants.dart';
 import 'package:covid_qrcode_bfh/screens/merchant/dashboard.dart';
