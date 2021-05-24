@@ -29,10 +29,11 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Merchant Details"),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Consumer<UserModel>(
             builder: (context, merchant, child) {
               return StreamBuilder<MerchantData>(
@@ -75,7 +76,7 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                               TextFormField(
                                 initialValue: merchantData.shopName ?? '',
                                 decoration: detailsDecoration.copyWith(
-                                    labelText: 'Shop Name'),
+                                    hintText: 'Shop Name'),
                                 validator: (value) => value.isEmpty
                                     ? 'Field Cannot be Blank '
                                     : null,
@@ -107,7 +108,7 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                 initialValue: merchantData.phoneNum ?? '',
                                 keyboardType: TextInputType.phone,
                                 decoration: detailsDecoration.copyWith(
-                                    labelText: 'Phone Number'),
+                                    hintText: 'Phone Number'),
                                 validator: (value) =>
                                     value.isEmpty ? 'Enter your Number ' : null,
                                 onChanged: (value) {
@@ -147,7 +148,7 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                 initialValue: merchantData.pinCode ?? '',
                                 keyboardType: TextInputType.number,
                                 decoration: detailsDecoration.copyWith(
-                                    labelText: 'Pincode'),
+                                    hintText: 'Pincode'),
                                 validator: (value) => value.isEmpty
                                     ? 'Enter your proper pincode'
                                     : null,
@@ -157,7 +158,7 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                   });
                                 },
                               ),
-                              SizedBox(height: 50),
+                              SizedBox(height: 30),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -196,6 +197,7 @@ class _DetailsMerchantState extends State<DetailsMerchant> {
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 20),
                             ],
                           ),
                         ),

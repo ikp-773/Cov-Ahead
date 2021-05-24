@@ -50,7 +50,6 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                           .merchantData
                           .listen((merchData) {
                         if (merchData != null) {
-                          print('#########');
                           Get.off(() => GeneratedQR(merchantData: merchData));
                         }
                       });
@@ -93,7 +92,7 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                   // print('Inside builder: ' + snapshot.data.toString());
                   return Center(
                     child: ListView.builder(
-                      padding: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.only(top: 10, bottom: 10),
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return snapshot.data != null
@@ -106,7 +105,7 @@ class _MerchantDashboardState extends State<MerchantDashboard> {
                   );
                 }
                 print('NO data');
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               },
             ),
           );
@@ -135,9 +134,9 @@ class CustomerTile extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Color(0x24000000),
-            offset: Offset(0, 8),
-            blurRadius: 28,
-            spreadRadius: 0,
+            offset: Offset(0, 0),
+            blurRadius: 8,
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -214,10 +213,5 @@ class CustomerTile extends StatelessWidget {
         ],
       ),
     );
-
-    // ListTile(
-    //   title: Text(snapshot.customerName),
-    //   leading: Text(snapshot.timestamp.toString()),
-    // );
   }
 }

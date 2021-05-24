@@ -17,7 +17,6 @@ class DetailsCustomer extends StatefulWidget {
 
 class _DetailsCustomerState extends State<DetailsCustomer> {
   final _formKey = GlobalKey<FormState>();
-  // final AuthServices _auth = AuthServices();
 
   String name = '';
   String email = '';
@@ -39,7 +38,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Column(
             children: [
               Consumer<UserModel>(
@@ -184,7 +183,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 50),
+                                SizedBox(height: 30),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     padding:
@@ -222,6 +221,7 @@ class _DetailsCustomerState extends State<DetailsCustomer> {
                                     ),
                                   ),
                                 ),
+                                SizedBox(height: 20),
                               ],
                             ),
                           );

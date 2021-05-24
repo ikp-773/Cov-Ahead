@@ -45,7 +45,7 @@ class MerchantOrCustomer extends StatelessWidget {
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+                      borderRadius: BorderRadius.circular(12.0),
                     ))),
                 onPressed: () async {
                   SharedPreferences _sharedPref =
@@ -84,7 +84,7 @@ class MerchantOrCustomer extends StatelessWidget {
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+                      borderRadius: BorderRadius.circular(12.0),
                     ))),
                 onPressed: () async {
                   SharedPreferences _sharedPref =
