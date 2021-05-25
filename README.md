@@ -13,10 +13,14 @@ Cov Ahead is a mobile application where shopkeepers have an app that shows QR co
 
 ## How it Works ?
 
-1. This application is for both Customers and Shop Owners.
+Google Firebase is used as the backend. Firestore as the database for storing both customer and merchant data. Firebase authentication to authenticate users: Using Google sign in or Email and password.
+
+QR code is generated for merchants using pretty_qr_code package, and the data encoded is the merchant UID. For customer part, scanning of QR code is facilitated by qr_code_scanner. On succesfull scanning of QR code, the data is compared with existing merchant UID and if a match is present, user is shown confirmation screen and the footprint is marked in both the merchant and customer side.
+
+1. This application is for both customers and shop owners.
 2. Once you choose your role you are requested to Sign In. 
 3. For customer it directly takes you to QR scanner. You could also update your information and check the shops you have visited.
-4. For Shop Owners once they Sign Up they are taken to their dashboard to show all the people that visited the shop. You can also update the shop details anytime and view your own QR code.
+4. For shop owners once they sign Up they are taken to their dashboard to show all the people that visited the shop. You can also update the shop details anytime and view your own QR code.
 
 ## Libraries used
 - cloud_firestore -  2.1.0
