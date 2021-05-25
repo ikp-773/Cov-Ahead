@@ -1,6 +1,6 @@
 ![BFH Banner](https://trello-attachments.s3.amazonaws.com/542e9c6316504d5797afbfb9/542e9c6316504d5797afbfc1/39dee8d993841943b5723510ce663233/Frame_19.png)
-# CovAhead
-Long Description about project. This project do that. This project is awesome...
+# Cov Ahead
+Cov Ahead is a mobile application where shopkeepers have an app that shows QR code and users can scan this QR code which will automatically add that user to the visitor list. This should replace manual entry of contact details in the shop due to COVID. 
 ## Team members
 1. [Deepak Mathews Koshy](https://github.com/deepakmkoshy)
 2. [Sarath Radhakrishnan
@@ -8,10 +8,15 @@ Long Description about project. This project do that. This project is awesome...
 ## Team Id
  BFH/rec2Gg87JODhKATrd/2021
 ## Link to product walkthrough
-[link to video]
+
 ## How it Works ?
-1. Step 1
-2. Step 2
+[Project Walkthrough and Code Explanation](https://drive.google.com/file/d/1OithQH27MtdlVbcdTT7XVf-w-Pw7sG4E/view?usp=sharing)
+
+1. This application is for both Customers and Shop Owners.
+2. Once you choose your role you are requested to Sign In. 
+3. For customer it directly takes you to QR scanner. You could also update your information and check the shops you have visited.
+4. For Shop Owners once they Sign Up they are taken to their dashboard to show all the people that visited the shop. You can also update the shop details anytime and view your own QR code.
+
 ## Libraries used
 - cloud_firestore -  2.1.0
 - firebase_auth - 1.1.4
@@ -27,4 +32,3 @@ Long Description about project. This project do that. This project is awesome...
 
 
 ## How to Run
-Instructions for running
