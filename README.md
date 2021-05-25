@@ -5,6 +5,7 @@ Cov Ahead is a mobile application where shopkeepers have an app that shows QR co
 1. [Deepak Mathews Koshy](https://github.com/deepakmkoshy)
 2. [Sarath Radhakrishnan
 ](https://github.com/sarathradhakrishnan)
+3. [Abhijith Kp](https://github.com/ikp-773)
 ## Team Id
  BFH/rec2Gg87JODhKATrd/2021
 ## Link to product walkthrough
