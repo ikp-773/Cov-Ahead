@@ -5,7 +5,7 @@
 
 Cov Ahead is a mobile application where shopkeepers have an app that shows QR code and users can scan this QR code which will automatically add that user to the visitor list. This should replace manual entry of contact details in the shop due to COVID. 
 
-![(http://bit.ly/Cov-Ahead)](https://img.shields.io/badge/APK-Cov%20Ahead-brightgreen?color=purple&style=for-the-badge)
+![(http://bit.ly/Cov-Ahead)](https://img.shields.io/badge/APK-Cov%20Ahead-brightgreen?color=purple&style=for-the-badge) : http://bit.ly/Cov-Ahead
 
 ## Team members
 1. [Deepak Mathews Koshy](https://github.com/deepakmkoshy)
