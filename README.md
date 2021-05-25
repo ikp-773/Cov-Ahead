@@ -9,8 +9,9 @@ Cov Ahead is a mobile application where shopkeepers have an app that shows QR co
  BFH/rec2Gg87JODhKATrd/2021
 ## Link to product walkthrough
 
-## How it Works ?
 [Project Walkthrough and Code Explanation](https://drive.google.com/file/d/1OithQH27MtdlVbcdTT7XVf-w-Pw7sG4E/view?usp=sharing)
+
+## How it Works ?
 
 1. This application is for both Customers and Shop Owners.
 2. Once you choose your role you are requested to Sign In. 
@@ -30,5 +31,38 @@ Cov Ahead is a mobile application where shopkeepers have an app that shows QR co
 
 ## How to configure
 
+#### 1. [Flutter Environment Setup](https://flutter.dev/docs/get-started/install)
+
+#### 2. Clone the repo
+
+```sh
+$ git clone https://github.com/ikp-773/Cov-Ahead.git
+$ cd Cov-Ahead/
+```
+
+#### 3. Setup the firebase app
+
+1. You'll need to create a Firebase instance. Follow the instructions at https://console.firebase.google.com.
+2. Once your Firebase instance is created, you'll need to enable Google authentication.
+
+* Go to the Firebase Console for your new instance.
+* Click "Authentication" in the left-hand menu
+* Click the "sign-in method" tab
+* Click "Google" and enable it
+* Click "Email/Password" and enable it
+
+3. Enable the Firebase Database
+* Go to the Firebase Console
+* Click "Firestore Database" in the left-hand menu
+* Click the "Create Database" button
+* It will prompt you to set up, rules, for the sake of simplicity, let us choose test mode, for now.
+* On the next screen select any of the locations you prefer.
+
+4. In the Firebase console, in the settings of your Android app, add your SHA-1 key by clicking "Add Fingerprint".
+
+5. Download google-services.json and place `google-services.json` into `/android/app/`.
 
 ## How to Run
+
+1. `flutter pub get`
+2. `flutter run`
